@@ -42,3 +42,27 @@ Remove the assert line to save gas
       postFeeAmount = assets - feeAmount;
   }
 ```
+
+### Add an event on `migrateReward()`
+
+### Where
+https://github.com/code-423n4/2022-11-redactedcartel/blob/74af1b6efe4c0c3f4796e0899a6c37fc745abdd7/src/PirexGmx.sol#L940-L950
+
+```solidity
+  function migrateReward() external whenPaused {
+      if (msg.sender != migratedTo) revert NotMigratedTo();
+      if (gmxRewardRouterV2.pendingReceivers(address(this)) != address(0))
+          revert PendingMigration();
+
+      // Transfer out any remaining base reward (ie. WETH) to the new contract
+      gmxBaseReward.safeTransfer(
+          migratedTo,
+          gmxBaseReward.balanceOf(address(this))
+      );
+  }
+```
+
+It's a good practice to trigger an event on every function that changes the storage. The function migrateReward has no events.
+
+### Solution
+Create and trigger a function at the end of `migrateReward()` function.
