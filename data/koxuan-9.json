@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "koxuan",
+  "risk": "3",
+  "title": "unbounded rewardTokens from ProducerToken[] can cause DOS and loss of fund",
+  "issueId": 9,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/9"
+}
