@@ -66,3 +66,64 @@ It's a good practice to trigger an event on every function that changes the stor
 
 ### Solution
 Create and trigger a function at the end of `migrateReward()` function.
+
+### `completeMigration()` can be called by the contract's owner only. However, it should be called by the new contract implementation.
+The function must be able to be called by the new contract implementation but it's able to be called by the contract's owner instead (through the onlyOwner modifier).
+
+### Where
+https://github.com/code-423n4/2022-11-redactedcartel/blob/74af1b6efe4c0c3f4796e0899a6c37fc745abdd7/src/PirexGmx.sol#L956-L974
+
+```solidity
+  /**
+      @notice Complete contract migration (called by the new contract)
+      @param  oldContract  address  Address of the old contract
+  */
+  function completeMigration(address oldContract)
+        external
+        whenPaused
+        onlyOwner
+  {
+      if (oldContract == address(0)) revert ZeroAddress();
+
+      // Trigger harvest to claim remaining rewards before the account transfer
+      IPirexRewards(pirexRewards).harvest();
+
+      // Complete the full account transfer process
+      gmxRewardRouterV2.acceptTransfer(oldContract);
+
+      // Perform reward token transfer from the old contract to the new one
+      PirexGmx(oldContract).migrateReward();
+
+      emit CompleteMigration(oldContract);
+  }
+```
+
+### Solution
+Remove the onlyOwner modifier and add a new validation
+
+```solidity
+  /**
+      @notice Complete contract migration (called by the new contract)
+      @param  oldContract  address  Address of the old contract
+  */
+  function completeMigration(address oldContract)
+        external
+        whenPaused
+  {
+      // Add this line
+      if (msg.sender != migratedTo) revert NotMigratedTo();
+
+      if (oldContract == address(0)) revert ZeroAddress();
+
+      // Trigger harvest to claim remaining rewards before the account transfer
+      IPirexRewards(pirexRewards).harvest();
+
+      // Complete the full account transfer process
+      gmxRewardRouterV2.acceptTransfer(oldContract);
+
+      // Perform reward token transfer from the old contract to the new one
+      PirexGmx(oldContract).migrateReward();
+
+      emit CompleteMigration(oldContract);
+  }
+```
