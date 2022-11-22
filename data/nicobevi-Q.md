@@ -26,7 +26,8 @@ https://github.com/code-423n4/2022-11-redactedcartel/blob/74af1b6efe4c0c3f4796e0
   }
 ```
 
-The assert validation is unnecesary since it will be always true (there is no rounding error risk there).
+The assert validation is unnecessary since it will be always true (there is no rounding error risk there).
+Also, assert will consume all the remaining gas needlessly.
 
 ### Solution
 Remove the assert line to save gas
