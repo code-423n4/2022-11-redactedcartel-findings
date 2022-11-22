@@ -25,3 +25,9 @@ https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol#
 https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol#L115
 https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol#L125
 https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol#L133
+
+3. Duplicate import of same file :-
+
+code snippet :-
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/vaults/AutoPxGlp.sol#L6
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/vaults/AutoPxGlp.sol#L8
