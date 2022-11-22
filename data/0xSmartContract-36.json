@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "0xSmartContract",
+  "risk": "2",
+  "title": "There is a risk that the `fees` variable is accidentally initialized to 0 and platform loses money",
+  "issueId": 36,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/36"
+}
