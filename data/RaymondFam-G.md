@@ -44,6 +44,17 @@ Here are the instances entailed:
 
 152:    function setPlatform(address _platform) external onlyOwner {
 ```
+[File: AutoPxGlp.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/vaults/AutoPxGlp.sol)
+
+```
+94:    function setWithdrawalPenalty(uint256 penalty) external onlyOwner {
+
+106:    function setPlatformFee(uint256 fee) external onlyOwner {
+
+118:    function setCompoundIncentive(uint256 incentive) external onlyOwner {
+
+130:    function setPlatform(address _platform) external onlyOwner {
+```
 ## += and -= Costs More Gas
 `+=` generally costs 22 more gas than writing out the assigned equation explicitly. The amount of gas wasted can be quite sizable when repeatedly operated in a loop.
 
@@ -114,6 +125,21 @@ All other instances entailed:
 
 203:        returns (uint256)
 ```
+[File: AutoPxGlp.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/vaults/AutoPxGlp.sol)
+
+```
+142:    function totalAssets() public view override returns (uint256) {
+
+155:        returns (uint256)
+
+181:        returns (uint256)
+
+333:        returns (uint256)
+
+373:    ) external nonReentrant returns (uint256) {
+
+417:    ) external payable nonReentrant returns (uint256) {
+```
 ## `||` Costs Less Gas Than Its Equivalent `&&`
 Rule of thumb: `(x && y)` is `(!(!x || !y))`
 
@@ -125,4 +151,25 @@ https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/vaults/PxGmxR
 
 ```
         if (!(globalRewards == 0 || userRewards == 0)) {
+```
+All other instances entailed:
+
+[File: PirexRewards.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol)
+
+```
+        if (globalRewards != 0 && userRewards != 0) {
+```
+## Use Storage Instead of Memory for Structs/Arrays
+A storage pointer is cheaper since copying a state struct in memory would incur as many SLOADs and MSTOREs as there are slots. In another words, this causes all fields of the struct/array to be read from storage, incurring a Gcoldsload (2100 gas) for each field of the struct/array, and then further incurring an additional MLOAD rather than a cheap stack read. As such, declaring the variable with the storage keyword and caching any fields that need to be re-read in stack variables will be much cheaper, involving only Gcoldsload for all associated field reads. Read the whole struct/array into a memory variable only when it is being returned by the function, passed into a function that requires memory, or if the array/struct is being read from another memory array/struct.
+
+Here are the instances entailed:
+
+[File: PirexRewards.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol)
+
+```
+160:       ERC20[] memory rewardTokens = p.rewardTokens;
+
+216:        UserState memory userState = producerTokens[producerToken].userStates[
+
+386:            ERC20[] memory rewardTokens = p.rewardTokens;
 ```
