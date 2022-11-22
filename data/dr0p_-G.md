@@ -1,0 +1,2 @@
+In "PxERC20.sol" file on line 85, 90, 119, 124 there's an opportunity for gas optimization.
+Mappings can only have type of storage, therefore "addition/subtraction assignment" operation  are more expensive (gas wise) than normal arithmetic operations (without assignment) due to the storage type.
