@@ -144,3 +144,11 @@ Custom errors are defined using the error statement, which can be used inside an
 code snippet:-
 https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/vaults/AutoPxGmx.sol#L355
 
+7. Expressions for constant values such as a call to keccak256(), should use immutable rather than constant
+
+This results in the keccak operation being performed whenever the variable is used, increasing gas costs relative to just storing the output hash. Changing to immutable will only perform hashing on contract deployment which will save gas.
+
+code snippet :-
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PxERC20.sol#L9
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PxERC20.sol#L10
+
