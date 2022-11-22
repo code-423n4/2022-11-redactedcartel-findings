@@ -144,6 +144,3 @@ Custom errors are defined using the error statement, which can be used inside an
 code snippet:-
 https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/vaults/AutoPxGmx.sol#L355
 
-
-
-
