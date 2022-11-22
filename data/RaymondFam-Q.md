@@ -9,6 +9,11 @@ Here are the instances entailed:
 34:    event SetFeeRecipient(FeeRecipient f, address recipient);
 35:    event SetTreasuryFeePercent(uint8 _treasuryFeePercent);
 ```
+[File: PirexRewards.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol)
+
+```
+63:    event Harvest(
+```
 ## Complementary Codehash Checks
 Consider adding an optional codehash check for each contract zero address check since the latter cannot guarantee a matching address has been inputted.
 
@@ -54,6 +59,41 @@ All other instances entailed:
 
 153:        if (_platform == address(0)) revert ZeroAddress();
 ```
+[File: AutoPxGlp.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/vaults/AutoPxGlp.sol)
+
+```
+75:        if (_gmxBaseReward == address(0)) revert ZeroAddress();
+76:        if (_asset == address(0)) revert ZeroAddress();
+
+79:        if (_platform == address(0)) revert ZeroAddress();
+80:        if (_rewardsModule == address(0)) revert ZeroAddress();
+
+131:        if (_platform == address(0)) revert ZeroAddress();
+
+374:        if (token == address(0)) revert ZeroAddress();
+```
+[File: PirexRewards.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol)
+
+```
+94:        if (_producer == address(0)) revert ZeroAddress();
+
+112:        if (address(producerToken) == address(0)) revert ZeroAddress();
+113:        if (address(rewardToken) == address(0)) revert ZeroAddress();
+
+136:        if (address(producerToken) == address(0)) revert ZeroAddress();
+137:        if (address(rewardToken) == address(0)) revert ZeroAddress();
+
+155:        if (address(producerToken) == address(0)) revert ZeroAddress();
+156:        if (address(rewardToken) == address(0)) revert ZeroAddress();
+
+183:        if (address(producerToken) == address(0)) revert ZeroAddress();
+
+271:        if (address(producerToken) == address(0)) revert ZeroAddress();
+
+282:        if (address(producerToken) == address(0)) revert ZeroAddress();
+
+374:        if (address(producerToken) == address(0)) revert ZeroAddress();
+```
 ## Complementary Threshold Checks
 Consider adding an optional threshold check for each zero amount check to avoid any input of edge value.
 
@@ -94,6 +134,15 @@ Here are the instances entailed:
 ```
 71:        UserState storage u = userRewardStates[user]; // @ u
 ```
+[File: PirexRewards.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol)
+
+```
+159:        ProducerToken storage p = producerTokens[producerToken]; // @ p
+
+285:        UserState storage u = producerTokens[producerToken].userStates[user]; // @ u
+
+380:        ProducerToken storage p = producerTokens[producerToken]; // @ p
+```
 ## Events Associated With Setter Functions
 Consider having events associated with setter functions emit both the new and old values instead of just the new value.
 
@@ -102,7 +151,7 @@ Here are the instances entailed:
 [File: PirexFees.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexFees.sol)
 
 ```
-67:        emit SetFeeRecipient(f, recipient);
+69:        emit SetFeeRecipient(f, recipient);
 
 93:        emit SetTreasuryFeePercent(_treasuryFeePercent);
 ```
@@ -119,6 +168,22 @@ Here are the instances entailed:
 
 157:        emit PlatformUpdated(_platform);
 ```
+[Fie: AutoPxGlp.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/vaults/AutoPxGlp.sol)
+
+```
+99:        emit WithdrawalPenaltyUpdated(penalty);
+
+111:        emit PlatformFeeUpdated(fee);
+
+123:        emit CompoundIncentiveUpdated(incentive);
+
+135:        emit PlatformUpdated(_platform);
+```
+[File: PirexRewards.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol)
+
+```
+98:        emit SetProducer(_producer);
+```
 ## Use `delete` to Clear Variables
 `delete a` assigns the initial value for the type to `a`. i.e. for integers it is equivalent to `a = 0`, but it can also be used on arrays, where it assigns a dynamic array of length zero or a static array of the same length with all elements reset. For structs, it assigns a struct with all members reset. Similarly, it can also be used to set an address to zero address or a boolean to false. It has no effect on whole mappings though (as the keys of mappings may be arbitrary and are generally unknown). However, individual keys and what they map to can be deleted: If `a` is a mapping, then `delete a[x]` will delete the value stored at x.
 
@@ -130,6 +195,13 @@ https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/vaults/PxGmxR
 
 ```
             delete userRewardStates[msg.sender].rewards = 0;
+```
+All other instances entailed:
+
+[File: PirexRewards.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol)
+
+```
+391:            p.userStates[user].rewards = 0;
 ```
 ## `block.timestamp` Unreliable
 The use of `block.timestamp` as part of the time checks can be slightly altered by miners/validators to favor them in contracts that have logic strongly dependent on them.
@@ -153,6 +225,21 @@ Here are the instances entailed:
 
 83:        emit UserAccrue(user, block.timestamp, balance, rewards);
 ```
+[File: PirexRewards.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol)
+
+```
+291:            (block.timestamp - u.lastUpdate);
+
+293:        u.lastUpdate = block.timestamp.safeCastTo32();
+
+297:        emit UserAccrue(producerToken, user, block.timestamp, balance, rewards);
+
+314:        if (block.timestamp != lastUpdate || totalSupply != lastSupply) {
+
+316:                (block.timestamp - lastUpdate) *
+
+325:                block.timestamp,
+```
 ## Unnecessary Emission of `block.timestamp`
 Any event emitted by Solidity includes the timestamp and block number implicitly. Adding it the second time just increases the cost of the transaction.
 
@@ -164,6 +251,15 @@ Here are the instances entailed:
 61:        emit GlobalAccrue(block.timestamp, totalSupply, rewards);
 
 83:        emit UserAccrue(user, block.timestamp, balance, rewards);
+```
+[File: PirexRewards.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol)
+
+```
+297:        emit UserAccrue(producerToken, user, block.timestamp, balance, rewards);
+
+323:            emit GlobalAccrue(
+...
+325:                block.timestamp,
 ```
 ## Assignment of Boolean in Conditional Check
 Making a variable assignment in a conditional statement deviates from the standard use and intention of the check and can easily lead to confusion. 
@@ -192,4 +288,113 @@ https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/vaults/AutoPx
                 : assets.mulDivDown(supply, totalAssets() - assets)) == 0
         ) revert ZeroShares();
 ```
- 
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/vaults/AutoPxGlp.sol#L311-L315
+
+```
+        if (
+            (shares = supply == 0
+                ? assets
+                : assets.mulDivDown(supply, totalAssets() - assets)) == 0
+        ) revert ZeroShares();
+```
+## Use of Hard-coded Addresses is Errors Prone
+Each contract needs contract addresses in order to be integrated into other protocols and systems. The address below is currently hard-coded, which may cause errors and result in the codebase’s deployment with an incorrect asset. Using hard-coded values instead of deployer-provided values makes this contract incredibly difficult to test.
+
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/vaults/AutoPxGmx.sol#L18-L19
+
+```
+    IV3SwapRouter public constant SWAP_ROUTER =
+        IV3SwapRouter(0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45);
+```
+Consider setting addresses when contracts are created rather than using hard-coded values. This practice will facilitate testing, making sure that contracts can be tested and reused across networks.
+
+## Add a Timelock to Critical Parameter Change
+It is a good practice to give time for users to react and adjust to critical changes with a mandatory time window between them. The first step merely broadcasts to users that a particular change is coming, and the second step commits that change after a suitable waiting period. This allows users that do not accept the change to withdraw within the grace period. A timelock provides more guarantees and reduces the level of trust required, thus decreasing risk for users. It also indicates that the project is legitimate (less risk of a malicious Owner making any malicious or ulterior intention). Specifically, privileged roles could use front running to make malicious changes just ahead of incoming transactions, or purely accidental negative effects could occur due to the unfortunate timing of changes.
+
+Consider extending the timelock feature beyond contract ownership management to business critical functions.
+
+Here are the instances entailed:
+
+[File: PirexFees.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexFees.sol)
+
+```
+63:     function setFeeRecipient(FeeRecipient f, address recipient)
+
+83:    function setTreasuryFeePercent(uint8 _treasuryFeePercent)
+```
+[File: AutoPxGmx.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/vaults/AutoPxGmx.sol)
+
+```
+104:    function setPoolFee(uint24 _poolFee) external onlyOwner {
+
+116:    function setWithdrawalPenalty(uint256 penalty) external onlyOwner {
+
+128:    function setPlatformFee(uint256 fee) external onlyOwner {
+
+140:    function setCompoundIncentive(uint256 incentive) external onlyOwner {
+
+152:    function setPlatform(address _platform) external onlyOwner {
+```
+[Fie: AutoPxGlp.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/vaults/AutoPxGlp.sol)
+
+```
+94:    function setWithdrawalPenalty(uint256 penalty) external onlyOwner {
+
+106:    function setPlatformFee(uint256 fee) external onlyOwner {
+
+118:    function setCompoundIncentive(uint256 incentive) external onlyOwner {
+
+130:    function setPlatform(address _platform) external onlyOwner {
+```
+[File: PirexRewards.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol)
+
+```
+93:    function setProducer(address _producer) external onlyOwner {
+
+151:    function addRewardToken(ERC20 producerToken, ERC20 rewardToken)
+
+179:    function removeRewardToken(ERC20 producerToken, uint256 removalIndex)
+```
+## No Storage Gap for Upgradeable Contracts
+Consider adding a storage gap at the end of an upgradeable contract just in case it would entail some child contracts in the future that might introduce new variables. Devoid of a storage gap addition, when the upgradable contract introduces new variables, it may override the variables in the inheriting contract, leading to storage collisions.
+
+Adding the following line of code would ensure no shifting down of storage in the inheritance chain of the inheriting contracts:
+
+```
+    uint256[50] private __gap;
+```
+Here is the contract instance entailed:
+
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol
+
+## Add a Constructor Initializer
+As per Openzeppelin's recommendation:
+
+https://forum.openzeppelin.com/t/uupsupgradeable-vulnerability-post-mortem/15680/6
+
+The guidelines are now to prevent front-running of `initialize()` on an implementation contract, by adding an empty constructor with the initializer modifier. Hence, the implementation contract gets initialized atomically upon deployment.
+
+This feature is readily incorporated in the Solidity Wizard since the UUPS vulnerability discovery. You would just need to check UPGRADEABILITY to have the following constructor code block added to the contract:
+
+```
+    /// @custom:oz-upgrades-unsafe-allow constructor
+    constructor() {
+        _disableInitializers();
+    }
+```
+Here is the contract instance with the missing constructor above:
+
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol
+
+## Function Calls in Loop Could Lead to Denial of Service
+Function calls made in unbounded loop are error-prone with potential resource exhaustion as it can trap the contract due to gas limitations or failed transactions. Consider bounding the loop length if the array is expected to be growing and/or handling a huge list of elements to avoid unnecessary gas wastage and denial of service.
+
+[File: PirexRewards.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol)
+
+```
+163:        for (uint256 i; i < len; ++i) {
+
+351:        for (uint256 i; i < pLen; ++i) {
+
+396:            for (uint256 i; i < rLen; ++i) {
+```
