@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "koxuan",
+  "risk": "2",
+  "title": "no zero checks on transferOwnership can cause loss of fund",
+  "issueId": 7,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/7"
+}
