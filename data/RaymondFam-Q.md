@@ -94,6 +94,36 @@ All other instances entailed:
 
 374:        if (address(producerToken) == address(0)) revert ZeroAddress();
 ```
+[File: PirexGmx.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol)
+
+```
+182:        if (_pxGmx == address(0)) revert ZeroAddress();
+183:        if (_pxGlp == address(0)) revert ZeroAddress();
+184:        if (_pirexFees == address(0)) revert ZeroAddress();
+185:        if (_pirexRewards == address(0)) revert ZeroAddress();
+186:        if (_delegateRegistry == address(0)) revert ZeroAddress();
+187:        if (_gmxBaseReward == address(0)) revert ZeroAddress();
+188:        if (_gmx == address(0)) revert ZeroAddress();
+189:        if (_esGmx == address(0)) revert ZeroAddress();
+190:        if (_gmxRewardRouterV2 == address(0)) revert ZeroAddress();
+191:        if (_stakedGlp == address(0)) revert ZeroAddress();
+
+317:         if (contractAddress == address(0)) revert ZeroAddress();
+
+497:         if (token == address(0)) {
+
+599:         if (token == address(0)) revert ZeroAddress();
+
+727:         if (token == address(0)) revert ZeroAddress();
+
+829:         if (token == address(0)) revert ZeroAddress();
+
+885:         if (voteDelegate == address(0)) revert ZeroAddress();
+
+926:         if (newContract == address(0)) revert ZeroAddress();
+
+961:         if (oldContract == address(0)) revert ZeroAddress();
+```
 ## Complementary Threshold Checks
 Consider adding an optional threshold check for each zero amount check to avoid any input of edge value.
 
@@ -143,6 +173,20 @@ Here are the instances entailed:
 
 380:        ProducerToken storage p = producerTokens[producerToken]; // @ p
 ```
+[File: PirexGmx.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol)
+
+```
+95:    event SetFee(Fees indexed f, uint256 fee); // @ f
+96:    event SetContract(Contracts indexed c, address contractAddress); // @ c
+
+217:    function _computeAssetAmounts(Fees f, uint256 assets) // @ f
+
+239:        RewardTracker r; // @ r
+
+300:    function setFee(Fees f, uint256 fee) external onlyOwner { // @ f
+
+313:    function setContract(Contracts c, address contractAddress) // @ c
+```
 ## Events Associated With Setter Functions
 Consider having events associated with setter functions emit both the new and old values instead of just the new value.
 
@@ -183,6 +227,13 @@ Here are the instances entailed:
 
 ```
 98:        emit SetProducer(_producer);
+```
+[File: PirexGmx.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol)
+
+```
+305:        emit SetFee(f, fee);
+
+319:        emit SetContract(c, contractAddress);
 ```
 ## Use `delete` to Clear Variables
 `delete a` assigns the initial value for the type to `a`. i.e. for integers it is equivalent to `a = 0`, but it can also be used on arrays, where it assigns a dynamic array of length zero or a static array of the same length with all elements reset. For structs, it assigns a struct with all members reset. Similarly, it can also be used to set an address to zero address or a boolean to false. It has no effect on whole mappings though (as the keys of mappings may be arbitrary and are generally unknown). However, individual keys and what they map to can be deleted: If `a` is a mapping, then `delete a[x]` will delete the value stored at x.
@@ -355,6 +406,13 @@ Here are the instances entailed:
 
 179:    function removeRewardToken(ERC20 producerToken, uint256 removalIndex)
 ```
+[File: PirexGmx.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol)
+
+```
+300:    function setFee(Fees f, uint256 fee) external onlyOwner {
+
+313:    function setContract(Contracts c, address contractAddress)
+```
 ## No Storage Gap for Upgradeable Contracts
 Consider adding a storage gap at the end of an upgradeable contract just in case it would entail some child contracts in the future that might introduce new variables. Devoid of a storage gap addition, when the upgradable contract introduces new variables, it may override the variables in the inheriting contract, leading to storage collisions.
 
@@ -398,3 +456,40 @@ Function calls made in unbounded loop are error-prone with potential resource ex
 
 396:            for (uint256 i; i < rLen; ++i) {
 ```
+## Use `require()` Instead of `assert()` to Validate Users` Input
+The assert function should only be used to examine invariants and test for internal problems. When used correctly, it can assess your contract and discover the conditions and function calls that will result in a failed assert. A properly running program should never reach a failing assert statement; if this occurs, there is a flaw in your contract that has to be addressed. 
+
+Here is one of the instances entailed which should be replaced by `require()` to validate a user's input:
+
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol#L225
+
+```
+        assert(feeAmount + postFeeAmount == assets);
+```
+On a side note, the `assert()` function when false, uses up all the remaining gas and reverts all the changes made. On the other hand, a `require()` function when false, also reverts back all the changes made to the contract but does refund all the remaining gas fees we offered to pay.
+
+Please visit the following link for further details:
+
+https://codedamn.com/news/solidity/assert-vs-require-in-solidity
+
+## Empty Event
+The following event has no parameter in it to emit anything. Consider refactoring or removing these unusable lines of code.
+
+[File: PirexGmx.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol)
+
+```
+144:    event ClearVoteDelegate();
+
+896:        emit ClearVoteDelegate();
+```
+## Inadequate NatSpec
+Solidity contracts can use a special form of comments, i.e., the Ethereum Natural Language Specification Format (NatSpec) to provide rich documentation for functions, return variables and more. Please visit the following link for further details:
+
+https://docs.soliditylang.org/en/v0.8.16/natspec-format.html
+
+Here are the contract instances missing NatSpec in its entirety:
+
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/interfaces/IPirexRewards.sol
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/interfaces/IProducer.sol
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/interfaces/IAutoPxGlp.sol
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/Common.sol
