@@ -312,7 +312,7 @@ Here are the instances entailed:
 ...
 325:                block.timestamp,
 ```
-## Assignment of Boolean in Conditional Check
+## Variable Assignment in Conditional Check
 Making a variable assignment in a conditional statement deviates from the standard use and intention of the check and can easily lead to confusion. 
 
 Here is the instance entailed:
@@ -325,8 +325,8 @@ https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/vaults/AutoPx
 Consider moving the needed assignment before the conditional statement by having the code lines rewritten as follows.
 
 ```
-        assets = previewRedeem(shares)) != 0;
-        require(assets, "ZERO_ASSETS");
+        assets = previewRedeem(shares));
+        require(assets != 0, "ZERO_ASSETS");
 ```
 All other instances entailed:
 
