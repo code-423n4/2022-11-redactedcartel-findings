@@ -55,6 +55,44 @@ Here are the instances entailed:
 
 130:    function setPlatform(address _platform) external onlyOwner {
 ```
+[File: PirexRewards.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol)
+
+```
+93:    function setProducer(address _producer) external onlyOwner {
+
+153:        onlyOwner
+
+181:        onlyOwner
+
+437:    ) external onlyOwner {
+
+465:    ) external onlyOwner {
+```
+[File: PirexGmx.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol)
+
+```
+272:    function configureGmxState() external onlyOwner whenPaused {
+
+300:    function setFee(Fees f, uint256 fee) external onlyOwner {
+
+315:        onlyOwner
+
+741:        onlyPirexRewards
+
+828:    ) external onlyPirexRewards {
+
+865:    ) external onlyOwner {
+
+884:    function setVoteDelegate(address voteDelegate) external onlyOwner {
+
+895:    function clearVoteDelegate() public onlyOwner {
+
+909:    function setPauseState(bool state) external onlyOwner {
+
+924:        onlyOwner
+
+959:        onlyOwner
+```
 ## += and -= Costs More Gas
 `+=` generally costs 22 more gas than writing out the assigned equation explicitly. The amount of gas wasted can be quite sizable when repeatedly operated in a loop.
 
@@ -65,7 +103,6 @@ https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PxERC20.sol#L
 ```
             balanceOf[to] = balanceOf[to] + amount;
 ```
-
 All other instances entailed:
 
 [File: PxERC20.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PxERC20.sol)
@@ -77,6 +114,11 @@ All other instances entailed:
 
 ```
 95:            rewardState += rewardAmount;
+```
+[File: PirexRewards.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol)
+
+```
+                producerState.rewardStates[rewardTokens[i]] += r;
 ```
 Similarly, as an example, the following `-=` instance entailed may be refactored as follows:
 
@@ -140,6 +182,56 @@ All other instances entailed:
 
 417:    ) external payable nonReentrant returns (uint256) {
 ```
+[File: PirexRewards.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol)
+
+```
+232:        returns (uint256)
+
+245:        returns (ERC20[] memory)
+
+261:    ) external view returns (address) {
+```
+[File: PirexGmx.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol)
+
+```
+237:        returns (uint256)
+
+382:        returns (
+383:            uint256,
+384:            uint256,
+385:            uint256
+386:        )
+
+426:        returns (
+427:            uint256,
+428:            uint256,
+429:            uint256
+430:        )
+
+563:        returns (
+564:            uint256,
+565:            uint256,
+566:            uint256
+567:        )
+
+593:        returns (
+594:            uint256,
+595:            uint256,
+596:            uint256
+597:        )
+
+693:        returns (
+694:            uint256,
+695:            uint256,
+696:            uint256
+697:        )
+
+721:        returns (
+722:            uint256,
+723:            uint256,
+724:            uint256
+725:        )
+```
 ## `||` Costs Less Gas Than Its Equivalent `&&`
 Rule of thumb: `(x && y)` is `(!(!x || !y))`
 
@@ -172,4 +264,125 @@ Here are the instances entailed:
 216:        UserState memory userState = producerTokens[producerToken].userStates[
 
 386:            ERC20[] memory rewardTokens = p.rewardTokens;
+```
+## Unchecked SafeMath Saves Gas
+"Checked" math, which is default in ^0.8.0 is not free. The compiler will add some overflow checks, somehow similar to those implemented by `SafeMath`. While it is reasonable to expect these checks to be less expensive than the current `SafeMath`, one should keep in mind that these checks will increase the cost of "basic math operation" that were not previously covered. This particularly concerns variable increments in for loops. 
+
+When no arithmetic overflow/underflow is going to happen, `unchecked { ++i ;}` in the code block to use the previous wrapping behavior further saves gas just as in the for loop below as an example:
+
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol#L163-L167
+
+```
+        for (uint256 i; i < len;) {
+            if (address(rewardTokens[i]) == address(rewardToken)) {
+                revert TokenAlreadyAdded();
+            }
+            unchecked {
+                ++i;
+            }
+        }
+```
+All other instances entailed:
+
+[File: PirexRewards.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol)
+
+```
+351:        for (uint256 i; i < pLen; ++i) {
+
+396:            for (uint256 i; i < rLen; ++i) {
+```
+## Function Order Affects Gas Consumption
+The order of function will also have an impact on gas consumption. Because in smart contracts, there is a difference in the order of the functions. Each position will have an extra 22 gas. The order is dependent on method ID. So, if you rename the frequently accessed function to more early method ID, you can save gas cost. Please visit the following site for further information:
+
+https://medium.com/joyso/solidity-how-does-function-name-affect-gas-consumption-in-smart-contract-47d270d8ac92
+
+## Activate the Optimizer
+Before deploying your contract, activate the optimizer when compiling using “solc --optimize --bin sourceFile.sol”. By default, the optimizer will optimize the contract assuming it is called 200 times across its lifetime. If you want the initial contract deployment to be cheaper and the later function executions to be more expensive, set it to “ --optimize-runs=1”. Conversely, if you expect many transactions and do not care for higher deployment cost and output size, set “--optimize-runs” to a high number.
+
+```
+module.exports = {
+  solidity: {
+    version: "0.8.13",
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 1000,
+      },
+    },
+  },
+};
+```
+Please visit the following site for further information:
+
+https://docs.soliditylang.org/en/v0.5.4/using-the-compiler.html#using-the-commandline-compiler
+
+Here's one example of instance on opcode comparison that delineates the gas saving mechanism:
+```
+for !=0 before optimization
+PUSH1 0x00
+DUP2
+EQ
+ISZERO
+PUSH1 [cont offset]
+JUMPI
+
+after optimization
+DUP1
+PUSH1 [revert offset]
+JUMPI
+```
+Disclaimer: There have been several bugs with security implications related to optimizations. For this reason, Solidity compiler optimizations are disabled by default, and it is unclear how many contracts in the wild actually use them. Therefore, it is unclear how well they are being tested and exercised. High-severity security issues due to optimization bugs have occurred in the past . A high-severity bug in the emscripten -generated solc-js compiler used by Truffle and Remix persisted until late 2018. The fix for this bug was not reported in the Solidity CHANGELOG. Another high-severity optimization bug resulting in incorrect bit shift results was patched in Solidity 0.5.6. Please measure the gas savings from optimizations, and carefully weigh them against the possibility of an optimization-related bug. Also, monitor the development and adoption of Solidity compiler optimizations to assess their maturity.
+
+## Private/Internal Function Embedded Modifier Reduces Contract Size
+Consider having the logic of a modifier embedded through a private (doesn't matter whether or not the contract entails any child contracts since the private visibility saves even more gas on function calls than the internal visibility) function to reduce contract size if need be.
+
+For instance, the following instance of modifier may be rewritten as follows:
+
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol#L205-L208
+
+```
+    function _onlyPirexRewards() private view {
+        if (msg.sender != pirexRewards) revert NotPirexRewards();
+    }
+
+    modifier onlyPirexRewards() {
+        _onlyPirexRewards();
+        _;
+    }
+```
+## Ternary Over `if ... else`
+Using ternary operator instead of the if else statement saves gas. 
+
+For instance the following instance of code block may be rewritten as follows:
+
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol#L909-L915
+
+```
+    state
+        ? {
+            _pause();
+        }
+        : {
+            _unpause();
+        }
+```
+All other instances entailed:
+
+[File: PirexGmx.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol)
+
+```
+241:        if (isBaseReward) {
+...
+243:        } else {
+
+497:        if (token == address(0)) {
+...
+502:        } else {
+```
+[File: AutoPxGlp.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/vaults/AutoPxGlp.sol)
+
+```
+266:        if (pxGmxAmountOut != 0) {
+...
+280:        } else {
 ```
