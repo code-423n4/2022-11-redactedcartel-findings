@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "HE1M",
+  "risk": "3",
+  "title": "Preventing any user from calling the functions `withdraw`, `redeem`, or `depositGmx` in contract `AutoPxGmx` ",
+  "issueId": 70,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/70"
+}
