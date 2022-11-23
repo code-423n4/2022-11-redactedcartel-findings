@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "rvierdiiev",
+  "risk": "2",
+  "title": "AutoPxGmx.setPoolFee doesn't check that such pool exists",
+  "issueId": 60,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/60"
+}
