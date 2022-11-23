@@ -1,12 +1,6 @@
-1 .Use latest solidity version and lock to one version in all files:-
 
-description :-
-Because old version might have bugs so update to latest version>
 
-code snippet :-
-https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/vaults/PirexERC4626.sol#L2
-
-2. Event is missing indexed fields :-
+1. Event is missing indexed fields :-
 
 Each event should use three indexed fields if there are three or more fields 
 
@@ -26,7 +20,7 @@ https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol#
 https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol#L125
 https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol#L133
 
-3. Duplicate import of same file :-
+2. Duplicate import of same file :-
 
 code snippet :-
 https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/vaults/AutoPxGlp.sol#L6
