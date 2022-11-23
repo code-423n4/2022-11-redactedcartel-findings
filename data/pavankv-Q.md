@@ -1,6 +1,10 @@
 
+1. No check of Erc20 contract of given token address leads to failure of entire function:-
+code snippet:-
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol#L651
 
-1. Event is missing indexed fields :-
+
+2. Event is missing indexed fields :-
 
 Each event should use three indexed fields if there are three or more fields 
 
@@ -20,7 +24,7 @@ https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol#
 https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol#L125
 https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol#L133
 
-2. Duplicate import of same file :-
+3. Duplicate import of same file :-
 
 code snippet :-
 https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/vaults/AutoPxGlp.sol#L6
