@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "8olidity",
+  "risk": "2",
+  "title": "previewWithdraw() should round up",
+  "issueId": 54,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/54"
+}
