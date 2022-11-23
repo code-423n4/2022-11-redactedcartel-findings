@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "8olidity",
+  "risk": "2",
+  "title": "A malicious early user/attacker can manipulate the Shares to take an unfair share of future users' deposits",
+  "issueId": 52,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/52"
+}
