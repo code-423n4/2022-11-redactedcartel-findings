@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "aphak5010",
+  "risk": "2",
+  "title": "uint32 variable will make application unusable and cause loss of funds in year 2106",
+  "issueId": 66,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/66"
+}
