@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "chaduke",
+  "risk": "3",
+  "title": "_userAccrue() is subject to front-running to manipulate the balance and gain rewards",
+  "issueId": 44,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/44"
+}
