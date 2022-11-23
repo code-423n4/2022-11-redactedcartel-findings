@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "perseverancesuccess",
+  "risk": "3",
+  "title": "Attackers can use Flashloan attack to manipulate the price of GMX vs gmxBaseReward to take money from autoPxGmx contract by using function compound with low input of amountOutMinimum ",
+  "issueId": 46,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/46"
+}
