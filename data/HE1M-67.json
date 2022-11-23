@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "HE1M",
+  "risk": "3",
+  "title": "Preventing other users from depositing `GMX` into `AutoPxGmx` contract to use compound features",
+  "issueId": 67,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/67"
+}
