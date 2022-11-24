@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "datapunk",
+  "risk": "2",
+  "title": "`claimRewards` in `PirexGmx` reallocate rewards, but due to rounding, it always favors glp rewards",
+  "issueId": 106,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/106"
+}
