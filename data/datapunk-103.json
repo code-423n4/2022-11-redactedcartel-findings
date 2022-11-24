@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "datapunk",
+  "risk": "2",
+  "title": "`migrateReward` transfers out `gmxBaseReward` to the new contract, but does not transfer out `stakedGlp`",
+  "issueId": 103,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/103"
+}
