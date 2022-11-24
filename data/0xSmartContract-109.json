@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "0xSmartContract",
+  "risk": "3",
+  "title": "First ERC4626 deposit exploit can break share calculation",
+  "issueId": 109,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/109"
+}
