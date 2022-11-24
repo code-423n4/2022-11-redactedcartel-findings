@@ -47,6 +47,7 @@ https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PxERC20.sol#L
 https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PxERC20.sol#L10
 
 5 . Mark functions as payable when users can't mistakenly send ETH :-
+
 Functions marked as payable are 24 gas cheaper than their counterpart (in non-payable functions, Solidity adds an extra check to ensure msg.value is zero).
 When users can't mistakenly send ETH to a function (as an example, when there's an onlyOwner modifier or alike), it is safe to mark it as payable.
 
@@ -54,3 +55,13 @@ code snippet:-
 https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol#L300
 https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexFees.sol#L63
 https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexFees.sol#L83
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol#L884
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol#L895
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol#L909
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol#L862
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol#L93
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol#L151
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol#L179
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol#L432
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol#L461
+
