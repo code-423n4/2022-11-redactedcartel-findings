@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "KingNFT",
+  "risk": "2",
+  "title": "Front running attack on 'PirexERC4626' based contracts",
+  "issueId": 90,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/90"
+}
