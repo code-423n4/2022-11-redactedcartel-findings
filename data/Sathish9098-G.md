@@ -1,6 +1,6 @@
 ## [G1] Unchecked Arithmetic operations . 
 
-        Since Solidity 0.8.0, all arithmetic operations revert on over- and underflow by default, thus making the use of these libraries unnecessary.
+        Since Solidity 0.8.0, all arithmetic operations revert on over- and underflow by default, thus making the use of these libraries unnecessary. can save 30-40 gas
 
 <https://docs.soliditylang.org/en/v0.8.0/control-structures.html#checked-or-unchecked-arithmetic>
 
@@ -109,23 +109,9 @@
 
       396:    for (uint256 i; i < rLen; ++i) {
 
-##
-
-##  [G5] WHEN EVER WE USE || WE DON'T WANT TO CHECK ALL CONDITIONS. ANY ONE CONDITION true THEN THE OVER ALL CONDITION CHECKS BECOME true EVEN OTHER CONDITIONS ARE false. SO ITS POSSIBLE SAVE MORE GAS FEE TO SKIP CONDITION CHECKS 
-
->  There are 2 instances of this issue.
-
-> FILE:   2022-11-redactedcartel/src/PirexRewards.sol
-
-    314:   if (block.timestamp != lastUpdate || totalSupply != lastSupply) { 
-
-> FILE:  2022-11-redactedcartel/src/vaults/AutoPxGlp.sol
-
-    163:  uint256 penalty = (_totalSupply == 0 || _totalSupply - shares == 0)
 
 ##
-
-## [G6]  SPLITTING if STATEMENTS THAT USE && SAVES GAS
+## [G5]  SPLITTING if STATEMENTS THAT USE && SAVES GAS
 
 >  There are 2 instances of this issue.
 
@@ -140,7 +126,7 @@
 
 ##
 
-##   [G7]  FUNCTIONS GUARANTEED TO REVERT WHEN CALLED BY NORMAL USERS CAN BE MARKED PAYABLE
+##   [G6]  FUNCTIONS GUARANTEED TO REVERT WHEN CALLED BY NORMAL USERS CAN BE MARKED PAYABLE
 
 >  If a function modifier such as onlyOwner is used, the function will revert if a normal user tries to pay the function. Marking the function as payable will lower the gas cost for legitimate callers because the compiler will not include checks for whether a payment was provided. The extra opcodes avoided are CALLVALUE(2),DUP1(3),ISZERO(3),PUSH2(3),JUMPI(10),PUSH1(3),DUP1(3),REVERT(0),JUMPDEST(1),POP(2), which costs an average of about 21 gas per call to the function, in addition to the extra deployment cost.
 
@@ -168,7 +154,38 @@
 
         152:   function setPlatform(address _platform) external onlyOwner {
 
+##
+
+## [G7] Compute known value off-chain . The input string for hashing is static. so we can calculate off-chain and assign it to the variable.
+
+  If You know what data to hash, there is no need to consume more computational power to hash it using keccak256 , you’ll end up consuming
+2x amount of gas.
+
+> FILE:  2022-11-redactedcartel/src/PxERC20.sol
+
+     9:   bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
+
+    10:  bytes32 public constant BURNER_ROLE = keccak256("BURNER_ROLE");
+
+##
+
+##  [G8] WHEN EVER WE USE || WE DON'T WANT TO CHECK ALL CONDITIONS. ANY ONE CONDITION true THEN THE OVER ALL CONDITION CHECKS BECOME true EVEN OTHER CONDITIONS ARE false. SO ITS POSSIBLE SAVE MORE GAS FEE TO SKIP CONDITION CHECKS 
+
+>  There are 2 instances of this issue.
+
+> FILE:   2022-11-redactedcartel/src/PirexRewards.sol
+
+    314:   if (block.timestamp != lastUpdate || totalSupply != lastSupply) { 
+
+> FILE:  2022-11-redactedcartel/src/vaults/AutoPxGlp.sol
+
+    163:  uint256 penalty = (_totalSupply == 0 || _totalSupply - shares == 0)
+
    
+
+
+
+    
 
 
 
