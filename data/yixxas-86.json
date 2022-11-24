@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "yixxas",
+  "risk": "2",
+  "title": "An `lpContract` that is set as reward recipient, if malicious can prevent itself from being unset",
+  "issueId": 86,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/86"
+}
