@@ -54,5 +54,10 @@ rewardsAmounts[2] =  gmxEsGmxRewards;
 rewardsAmounts[3] =  glpEsGmxRewards;
 ```
 
- 
+ GA11: 
+https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexGmx.sol#L20
+Contract ``PirexGmx`` needs to inherit interface ``IProducer``.
+```
+contract PirexGmx is IProducer, ReentrancyGuard, Owned, Pausable {
+```
 
