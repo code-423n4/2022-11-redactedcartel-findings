@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "martin",
+  "risk": "2",
+  "title": "M-01 Return values of `transferFrom()` not checked",
+  "issueId": 95,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/95"
+}
