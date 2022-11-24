@@ -61,3 +61,6 @@ Contract ``PirexGmx`` needs to inherit interface ``IProducer``.
 contract PirexGmx is IProducer, ReentrancyGuard, Owned, Pausable {
 ```
 
+GA12: https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexRewards.sol#L27
+Better to mention ``PirexGmx`` as the current producer, it takes a while to figure this out.
+
