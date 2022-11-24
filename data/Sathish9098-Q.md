@@ -1,4 +1,4 @@
-## [1] NOT USING THE NAMED RETURN VARIABLES ANYWHERE IN THE FUNCTION IS CONFUSING
+## [N1] NOT USING THE NAMED RETURN VARIABLES ANYWHERE IN THE FUNCTION IS CONFUSING
 
 > FILE:  2022-11-redactedcartel/src/PirexGmx.sol
  
@@ -9,11 +9,11 @@
 
  <https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexRewards.sol#L207-L214>     
 
-https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexRewards.sol#L339-L344
+<https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexRewards.sol#L339-L344>
 
 ##
 
-## [2] The **Fees j** parameters possible input values are only  [0,1,2]. But the parameter accept uint8 length of values . Its possible to enter wrong inputs while calling the parameter.  uint8 range is 255. This is the wrong code practice. Many times the functions execution always fails 
+## [L1] The **Fees j** parameters possible input values are only  [0,1,2]. But the parameter accept uint8 length of values . Its possible to enter wrong inputs while calling the functions.  uint8 range is 255. This is the wrong code practice. Many times the functions execution always fails . If we assign first parameter values other than [0,1,2] the function call always fails . the Fees enum size is only 2.
 
     > FILE:  2022-11-redactedcartel/src/PirexGmx.sol
 
@@ -21,7 +21,7 @@ https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fd
 
 ##
 
-## [3]   EXPRESSIONS FOR CONSTANT VALUES SUCH AS A CALL TO KECCAK256(), SHOULD USE IMMUTABLE RATHER THAN CONSTANT
+## [N2]   EXPRESSIONS FOR CONSTANT VALUES SUCH AS A CALL TO KECCAK256(), SHOULD USE IMMUTABLE RATHER THAN CONSTANT
 
 >  While it doesn’t save any gas because the compiler knows that developers often make this mistake, it’s still best to use the right tool for the task at hand. There is a difference between constant variables and immutable variables, and they should each be used in their appropriate contexts. constants should be used for literal values written into the code, and immutable variables should be used for expressions, or values calculated in, or passed into the constructor.
 
@@ -35,7 +35,7 @@ https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fd
 
 ##
 
-##[4]  CONSTANT REDEFINED ELSEWHERE
+## [N3]  CONSTANT REDEFINED ELSEWHERE
 
 >  onsider defining in only one contract so that values cannot become out of sync when only one location is updated. A cheap way to store constants in a single location is to create an internal constant in a library. If the variable is a local cache of another contract’s value, consider making the cache variable internal or private, which will require external users to query the contract with the source of truth, so that callers don’t get out of sync.
 
