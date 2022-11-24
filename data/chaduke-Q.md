@@ -42,7 +42,17 @@ https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fd
 https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexGmx.sol#L940
 The allowance set at line L292 for ``gmx`` to ``stakedGmx`` needs to be reset to zero when migrating to a new contract.
 
-
+QA10.
+https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexGmx.sol#L792-L806
+This part can be revised to the following to prevent the discrepancy, a concern raised in the documentation
+```
+require(baseRewards == gmxBasedRewards + glpBaseRewards);
+require(esGmxRewards == gmxEsGmxRewards + glpEsGmxRewards);
+rewardsAmounts[0] =  gmxBaseRewards;
+rewardsAmounts[1] = glpBaseRewards;
+rewardsAmounts[2] =  gmxEsGmxRewards;
+rewardsAmounts[3] =  glpEsGmxRewards;
+```
 
  
 
