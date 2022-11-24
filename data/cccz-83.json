@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "cccz",
+  "risk": "2",
+  "title": "AutoPxGmx: Calling compound() in some functions without slippage control for uniswap's token swap",
+  "issueId": 83,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/83"
+}
