@@ -5,9 +5,11 @@
 While this is inside an external view function, consider wrapping this in an unchecked statement so that external contracts calling this might save some gas
 
 code snippet:-
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol#L798
 https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol#L795
 https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol#L433
 https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol#L802
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol#L805
 https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol#L785
 https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol#L787
 https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol#L289
@@ -44,3 +46,9 @@ code snippet :-
 https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PxERC20.sol#L9
 https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PxERC20.sol#L10
 
+5 . Mark functions as payable when users can't mistakenly send ETH :-
+Functions marked as payable are 24 gas cheaper than their counterpart (in non-payable functions, Solidity adds an extra check to ensure msg.value is zero).
+When users can't mistakenly send ETH to a function (as an example, when there's an onlyOwner modifier or alike), it is safe to mark it as payable.
+
+code snippet:-
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol#L300
