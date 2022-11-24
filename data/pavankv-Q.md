@@ -29,3 +29,12 @@ https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol#
 code snippet :-
 https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/vaults/AutoPxGlp.sol#L6
 https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/vaults/AutoPxGlp.sol#L8
+
+4 . Missing check of Erc20 contract of given address :-
+
+Add check whether it consist contract before going into further process.
+
+code snippet:-
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol#L133
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol#L107
+
