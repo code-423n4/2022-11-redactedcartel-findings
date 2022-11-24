@@ -52,3 +52,5 @@ When users can't mistakenly send ETH to a function (as an example, when there's 
 
 code snippet:-
 https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol#L300
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexFees.sol#L63
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexFees.sol#L83
