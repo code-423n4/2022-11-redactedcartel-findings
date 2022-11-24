@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "yixxas",
+  "risk": "3",
+  "title": "A single `producerToken` can be used to infinitely generate rewards for user",
+  "issueId": 85,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/85"
+}
