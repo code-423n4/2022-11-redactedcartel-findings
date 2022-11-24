@@ -20,8 +20,29 @@ QA4: https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324
 Use FEE_PERCENT_DENOMINATOR = 10000 might give a better precision
 
 
-QA5: PirexRewards.sol and PirexRewards.sol share four functions: ``globalAccure()``, ``userAccruee()``, ``harvet()``, and ``claim``, refactoring into a library or inheriting from a base class will be helpful
+QA5: PirexRewards.sol and PirexRewards.sol share four functions: ``globalAccure()``, ``userAccruee()``, ``harvet()``, and ``claim``, refactoring into a library or 
+tinheriting from a base class will be helpful
+
+QA6: https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexGmx.sol#L953
+the documentation should be ``called by the owner at the new contract". 
+
+QA7: https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexGmx.sol#L234
+The ``_calculateRewards`()`` function differentiate four cases of reward types by the two boolean variables ``isBasedReward`` and ``useGmx``. It might better to introduce the following enum type
+```
+     enum RewardTypes {gmxBasedRewards, glpBasedRewards, gmxEsGmxRewards, glpEsGmxRewards}
+     function _calculateRewards(RewardTypes rt){
+     }
+```
+
+QA8: https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PxGmx.sol#L19
+The ``PirexGmx`` contract has a ``burn()`` function that has an empty body, which overides the behavior of that of the base contract ``PxERC20``. As a result, PxGmx cannot be burned. It this is the intention of the design, then it is better to document it and use a revert statement in the burn implemetation to make it explicit. 
+
+QA9: https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexGmx.sol#L292
+https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexGmx.sol#L921
+https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexGmx.sol#L940
+The allowance set at line L292 for ``gmx`` to ``stakedGmx`` needs to be reset to zero when migrating to a new contract.
 
 
 
+ 
 
