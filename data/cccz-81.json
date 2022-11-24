@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "cccz",
+  "risk": "2",
+  "title": "A malicious early user/attacker can manipulate the apxGMX/apxGLP 's pricePerShare to take an unfair share of future users' deposit",
+  "issueId": 81,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/81"
+}
