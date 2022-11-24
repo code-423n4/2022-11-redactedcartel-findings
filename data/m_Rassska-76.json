@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "m_Rassska",
+  "risk": "2",
+  "title": "Unchecked return value for `token.transferFrom()`",
+  "issueId": 76,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/76"
+}
