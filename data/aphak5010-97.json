@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "aphak5010",
+  "risk": "2",
+  "title": "AutoPxGmx.maxWithdraw and AutoPxGlp.maxWithdraw functions calculate asset amount that is too big",
+  "issueId": 97,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/97"
+}
