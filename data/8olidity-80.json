@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "8olidity",
+  "risk": "3",
+  "title": "`platform` address update, leading to DOS risk",
+  "issueId": 80,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/80"
+}
