@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "datapunk",
+  "risk": "3",
+  "title": "`rewardTokens` can be removed by owner without claiming them first",
+  "issueId": 100,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/100"
+}
