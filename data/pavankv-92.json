@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "pavankv",
+  "risk": "2",
+  "title": "function harvest() and claim() has unbounded gas consumption for loop and leads to fails entire function.",
+  "issueId": 92,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/92"
+}
