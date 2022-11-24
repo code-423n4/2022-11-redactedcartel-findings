@@ -33,3 +33,21 @@ Checking wether it is really necessary to change the state vairables can save ga
                   u.lastBalance = balance.safeCastTo224();
        }
  ``
+
+G5. https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexGmx.sol#L863
+Change the argument ``string memory _delegationSpace`` to ``bytes32`` can save gas since no transformation is needed.
+
+```
+ function setDelegationSpace(
+        bytes32 _delegationSpace,
+        bool shouldClear
+    ) external onlyOwner {
+        if (shouldClear) {
+            // Clear the delegation for the current delegation space
+            clearVoteDelegate();
+        }     
+        delegationSpace = _delegationSpace
+
+        emit SetDelegationSpace(_delegationSpace, shouldClear);
+    }
+```
