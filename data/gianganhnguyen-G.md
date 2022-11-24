@@ -30,6 +30,9 @@ Instances include:
     File src/PxERC20.sol, line 9:               bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     File src/PxERC20.sol, line 10:             bytes32 public constant BURNER_ROLE = keccak256("BURNER_ROLE");
 
+    File src/vaults/AutoPxGmx.sol, line 18:               IV3SwapRouter public constant SWAP_ROUTER =
+        IV3SwapRouter(0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45);
+
 Change these expressions from `constant` to `immutable` and implement the calculation in the constructor, or hardcode these values in the constants and add a comment to say how the value was calculated.
 
 # 3. [G-3] <X> += <Y> COSTS MORE GAS THAN <X> = <X> + <Y> FOR STATE VARIABLES
