@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "koxuan",
+  "risk": "3",
+  "title": "withdraw in autoPxGMX does not check for rounding error and it rounds down, allowing infinite withdrawals while burning 0 shares",
+  "issueId": 74,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/74"
+}
