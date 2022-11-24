@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "Ruhum",
+  "risk": "2",
+  "title": "AutoPxGmx and AutoPxGlp `previewWithdraw()` rounds down instead of up",
+  "issueId": 98,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/98"
+}
