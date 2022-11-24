@@ -21,7 +21,7 @@ This is due to the recalculation in place for `rewardAmounts`.
 `ClaimRewards` should emit `rewardAmounts` values in place the gmxBaseRewards, etc.
 
 ## L4. `PxGmxReward` is not inheriting from ERC20, yet it is accessing ERC20 functions. 
-`AutoPxGlp` inherits from both `PxGmxReward` and `PirexERC4626`, which in turn from `ERC20`. Therefore
+`AutoPxGlp` inherits from both `PxGmxReward` and `PirexERC4626`, which in turn from `ERC20`. Therefore, things do work. However it is best practice to make code more explicity by inheriting from `ERC20`.
 
 ## L5. `withdraw` and `redeem` functions in `AutoPxGmx` can reuse the functions defined in `PirexERC4626` by calling `PirexERC4626.withdraw` and `PirexERC4626.redeem`
 
