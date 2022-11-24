@@ -20,6 +20,8 @@ QA4: https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324
 Use FEE_PERCENT_DENOMINATOR = 10000 might give a better precision
 
 
+QA5: PirexRewards.sol and PirexRewards.sol share four functions: ``globalAccure()``, ``userAccruee()``, ``harvet()``, and ``claim``, refactoring into a library or inheriting from a base class will be helpful
+
 
 
 
