@@ -60,3 +60,49 @@ blockReward=pendingRewards;
             ((blockReward * precision) / r.totalSupply());
 
 ```
+#### small amount of tokens won't be distributed
+```js
+    function distributeFees(ERC20 token) external {
+        uint256 distribution = token.balanceOf(address(this));
+        uint256 treasuryDistribution = (distribution * treasuryFeePercent) /
+            FEE_PERCENT_DENOMINATOR;
+        uint256 contributorsDistribution = distribution - treasuryDistribution;
+		
+```
+if `distribution` is less than `FEE_PERCENT_DENOMINATOR` then it will be zero and be a waste of gas by  the caller
+add a zero check to make sure it's not zero.
+#### make sure the total supply can be less than uint256 because for some tokens this can cause an  issue
+```js
+   globalState.lastSupply = totalSupply.safeCastTo224();
+```
+#### the function will revert if `totalPxGlpFee` is less than the `Incentive` which is possible with the calculations
+```js
+    uint256 newAssets = totalAssets() - preClaimTotalAssets;
+        if (newAssets != 0) {
+            totalPxGlpFee = (newAssets * platformFee) / FEE_DENOMINATOR;
+            pxGlpIncentive = optOutIncentive
+                ? 0
+                : (totalPxGlpFee * compoundIncentive) / FEE_DENOMINATOR;
+
+            if (pxGlpIncentive != 0)
+                asset.safeTransfer(msg.sender, pxGlpIncentive);
+            asset.safeTransfer(owner, totalPxGlpFee - pxGlpIncentive);
+        }
+
+```
+##### approve all should be used it can cause risk of hacks and loss of funds, on the front end approve how much users need 
+```
+        gmxBaseReward.safeApprove(address(SWAP_ROUTER), type(uint256).max);
+        gmx.safeApprove(_platform, type(uint256).max);
+```
+https://github.com/code-423n4/2022-11-redactedcartel/blob/684627b7889e34ba7799e50074d138361f0f532b/src/vaults/AutoPxGmx.sol#L98-L99
+#####  if time passes  between states then more tokens will cause a more significant balance just make sure it's updated by a right way and that rewards are not updated too much 
+```js
+        uint256 rewards = u.rewards +
+            u.lastBalance *
+            (block.timestamp - u.lastUpdate);
+        u.lastUpdate = block.timestamp.safeCastTo32();
+        u.lastBalance = balance.safeCastTo224();
+        u.rewards = rewards;
+
+```
