@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "ktg",
+  "risk": "2",
+  "title": "No limit on setRewardRecipient may lead to Denial of service",
+  "issueId": 117,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/117"
+}
