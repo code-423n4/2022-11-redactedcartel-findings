@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "Sathish9098",
+  "risk": "2",
+  "title": "In depositGmx() function  amount  should be checked with caller or msg.sender wallet balance using **require** statement  ",
+  "issueId": 133,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/133"
+}
