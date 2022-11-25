@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "Sathish9098",
+  "risk": "2",
+  "title": "In depositFsGlp() function  AMOUNT  should be checked with caller or msg.sender wallet balance using REQUIRE statement  .",
+  "issueId": 134,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/134"
+}
