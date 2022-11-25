@@ -7,6 +7,7 @@ The same tests were used that are provided in the contest repository.
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
 | G-00 | Claiming rewards from `PirexRewards` requires redundant calls to `harvest` function | PirexRewards.sol | 1 | not calculated | not calculated |
 | G-01 | Superfluous `assert` statement | PirexGmx.sol | 1 | 9216 | 95 |
+| G-02 | `X = X + Y` costs less Gas than `X += Y` | PxGmxReward.sol | 1 | 1200 | 1714 |
 
 ## [G-00] Claiming rewards from `PirexRewards` requires redundant calls to `harvest` function
 A user can claim rewards from the `PirexRewards` contract with the `claim` function ([https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexRewards.sol#L373](https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexRewards.sol#L373)).  
@@ -41,3 +42,16 @@ So the `assert` statement can just be removed.
 
 Deployment Gas saved: **9216**  
 Method call Gas saved: **95**  
+
+## [G-02] `X = X + Y` costs less Gas than `X += Y`
+There is 1 instance of this:  
+
+[https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/vaults/PxGmxReward.sol#L95](https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/vaults/PxGmxReward.sol#L95)  
+
+Fix:  
+```solidity
+rewardState = rewardState + rewardAmount;
+```
+
+Deployment Gas saved: **1200**  
+Method call Gas saved: **1714**  
