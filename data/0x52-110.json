@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "0x52",
+  "risk": "3",
+  "title": "PirexGMX can be permanatly DOS'd due to 15 minute cooldown applied by GMX after staking",
+  "issueId": 110,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/110"
+}
