@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "Rolezn",
+  "risk": "2",
+  "title": "Not calling `safeApprove(0)` before setting a new approval causes the call to revert when used with Tether (USDT)",
+  "issueId": 122,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/122"
+}
