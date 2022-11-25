@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "Rolezn",
+  "risk": "2",
+  "title": "`PirexERC4626.sol` does not work with fee-on-transfer tokens",
+  "issueId": 131,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/131"
+}
