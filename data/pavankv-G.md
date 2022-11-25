@@ -38,6 +38,7 @@ https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.
 https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol#L386
 
 
+
 4. Expressions for constant values such as a call to keccak256(), should use immutable rather than constant
 
 This results in the keccak operation being performed whenever the variable is used, increasing gas costs relative to just storing the output hash. Changing to immutable will only perform hashing on contract deployment which will save gas.
@@ -64,4 +65,8 @@ https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.
 https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol#L179
 https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol#L432
 https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol#L461
+
+
+6. Use x=x+y instead of x+=y to save gas :-
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/vaults/PxGmxReward.sol#L95
 
