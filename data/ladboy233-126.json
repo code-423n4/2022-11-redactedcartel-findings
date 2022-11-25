@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "ladboy233",
+  "risk": "2",
+  "title": "Solmate SafeTransfser does not check the contract code size.",
+  "issueId": 126,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/126"
+}
