@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "ladboy233",
+  "risk": "3",
+  "title": " A malicious early user/attacker can manipulate the price Per Share to take an unfair share of future users' deposits in the Autocompounding vault implementation",
+  "issueId": 128,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/128"
+}
