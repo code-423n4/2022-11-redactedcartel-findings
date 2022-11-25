@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "koxuan",
+  "risk": "3",
+  "title": "compound in AutoPxGmx and AutoPxGlp has no access control, allowing anyone to claim incentives.",
+  "issueId": 111,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/111"
+}
