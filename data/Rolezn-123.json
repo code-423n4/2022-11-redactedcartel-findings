@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "Rolezn",
+  "risk": "2",
+  "title": "Solmate's `safeTransferFrom` does not check the codesize of the token address, which may lead to fund loss",
+  "issueId": 123,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/123"
+}
