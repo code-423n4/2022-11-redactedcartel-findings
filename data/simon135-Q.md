@@ -60,5 +60,3 @@ blockReward=pendingRewards;
             ((blockReward * precision) / r.totalSupply());
 
 ```
-
-
