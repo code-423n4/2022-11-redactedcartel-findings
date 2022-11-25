@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "ladboy233",
+  "risk": "2",
+  "title": "SWAP_ROUTER in AutoPxGmx.sol is hardcoded and not compatible on Avalanche",
+  "issueId": 132,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/132"
+}
