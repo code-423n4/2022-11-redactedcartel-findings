@@ -6,7 +6,7 @@
 | L-01      | Missing `whenNotPaused` modifier | PirexGmx.sol | 2 |
 | N-00      | Event is missing indexed fields | - | 34 |
 | N-01      | Variable can be declared `immutable` | PxGmxReward.sol | 1 |
-| N-02      | Comment not according to logic | PirexERC4626.sol | 2 |
+| N-02      | Comment not according to logic | - | 3 |
 
 ## [L-00] No zero address check and 2-Step-Transfer in solmate/auth/Owned.sol
 4 contracts inherit the `Owned` contract in `solmate/auth/Owned.sol` ([https://github.com/transmissions11/solmate/blob/main/src/auth/Owned.sol](https://github.com/transmissions11/solmate/blob/main/src/auth/Owned.sol)).  
@@ -115,6 +115,7 @@ There are 1 instances of this.
 [https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/vaults/PxGmxReward.sol#L15](https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/vaults/PxGmxReward.sol#L15)  
 
 ## [N-02] Comment not according to logic
+### Instance 1 and 2
 [https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/vaults/PirexERC4626.sol#L234](https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/vaults/PirexERC4626.sol#L234)  
 
 [https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/vaults/PirexERC4626.sol#L251](https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/vaults/PirexERC4626.sol#L251)  
@@ -122,3 +123,8 @@ There are 1 instances of this.
 The above 2 comments state that the `transfer` / `transferFrom` function is overriden in order to allow a `pre-transfer` internal hook to run.  
 
 However when you look into the function code you will see that it is not a `pre-transfer` but `post-transfer` hook that runs.  
+
+### Instance 3
+[https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/vaults/AutoPxGlp.sol#L86](https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/vaults/AutoPxGlp.sol#L86)  
+
+It is not the "Uniswap V3 router" that is approved but the platform.  
