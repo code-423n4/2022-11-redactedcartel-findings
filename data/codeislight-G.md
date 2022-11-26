@@ -89,3 +89,23 @@ test cases:
 
 - within autoPxGlp and autoPxGmx, owner fees are better be updated in a state variable, and then withdrawn using a special onlyOwner function that withdraws the owner fees, instead of costing the user on each deposit/redeem/withdraw.
 - removing SafeTransfer and safeTransferFrom, it was made for irregular tokens that might not return boolean nor revert on transfer/transferFrom, but since GLP, GMX tokens are adhering to ERC20 standard and there is no need to check the return calldata whether it reverts or not, since it eithers hit an error statement and revert the tx or return true as a sign of success.
+
+- moving event emitting to the end of the transaction, in the case of transaction revert, it deosn't include its cost, instance in PirexERC4626.redeem()
+
+            _burn(owner, shares);
+    
+            emit Withdraw(msg.sender, receiver, owner, assets, shares);
+    
+            asset.safeTransfer(receiver, assets);
+    
+            afterWithdraw(owner, assets, shares);
+
+turned into :
+
+            _burn(owner, shares);
+    
+            asset.safeTransfer(receiver, assets);
+    
+            afterWithdraw(owner, assets, shares);
+    
+            emit Withdraw(msg.sender, receiver, owner, assets, shares);
