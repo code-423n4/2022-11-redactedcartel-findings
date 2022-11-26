@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "amaechieth",
+  "risk": "3",
+  "title": "PxGmxReward.sol: Invalid ERC20 instance of non-ERC20 contract",
+  "issueId": 164,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/164"
+}
