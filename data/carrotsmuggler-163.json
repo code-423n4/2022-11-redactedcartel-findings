@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "carrotsmuggler",
+  "risk": "2",
+  "title": "Missing input checks on certain functions leads to incorrect event logs",
+  "issueId": 163,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/163"
+}
