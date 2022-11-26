@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "Sathish9098",
+  "risk": "3",
+  "title": "In _computeAssetAmounts() the feeAmount always returns 0 amount. Also postFeeAmount value is always equal to ASSETS value.",
+  "issueId": 152,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/152"
+}
