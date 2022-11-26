@@ -4,14 +4,15 @@
 |:--:|:-------| :-----:|
 | [G-01] | Remove the `initializer` modifier [20 K Gas Saved] | 1 |
 | [G-02] | Packing Storage | 4 |
-| [G-03] | Optimize names to save gas | All |
+| [G-03] | No need `assert` check in `_computeAssetAmounts()` [19 K  Gas Saved ] | 1 |
 | [G-04] | Use ``assembly`` to write _address storage values_ | 27 |
 | [G-05] | The solady Library's Ownable contract is significantly gas-optimized, which can be used | 2|
 | [G-06] | Setting The Constructor To Payable  | 8 |
 | [G-07] | Functions guaranteed to revert_ when callled by normal users can be marked `payable`   | 8 |
 | [G-08] | Project file uses Transparent Proxy model but UUPS model is cheaper| 1 |
+| [G-09] | Optimize names to save gas | All |
 
-Total 8 issues
+Total 9 issues
 
 ### Suggestions
 | Number | Suggestion Details |
@@ -79,49 +80,105 @@ _Recommendation Code:_
 | platformFee | 1 | 0 | 8 |
 | compoundIncentive | 1 | 8 | 8 |
 
-### [G-03] Optimize names to save gas [22 gas per instance]
+### [G-03]  No need `assert` check in `_computeAssetAmounts()` [19 K  Gas Saved ]
 
-**Context:** 
-All Contracts
+The `assert` check in this function is not needed. Because this check will always be true because of this line: `postFeeAmount = assets - feeAmount;`
+Deployment Gas Saved : 19 K
+Transaction Gas Saved : 90 
 
-**Description:** 
-Contracts most called functions could simply save gas by function ordering via ```Method ID```. Calling a function at runtime will be cheaper if the function is positioned earlier in the order (has a relatively lower Method ID) because ```22 gas``` are added to the cost of a function for every position that came before it. The caller can save on gas if you prioritize most called functions. 
+**Context:**
+```solidity
+src/PirexGmx.sol:
+  216       */
+  217:     function _computeAssetAmounts(Fees f, uint256 assets)
+  218:         internal
+  219:         view
+  220:         returns (uint256 postFeeAmount, uint256 feeAmount)
+  221:     {
+  222: 
+  223: 
+  224:         feeAmount = (assets * fees[f]) / FEE_DENOMINATOR;
+  225:         postFeeAmount = assets - feeAmount;
+  226: 
+  227:         assert(feeAmount + postFeeAmount == assets);
+  228:     }
 
-**Recommendation:** 
-Find a lower ```method ID``` name for the most called functions for example Call() vs. Call1() is cheaper by ```22 gas```
-For example, the function IDs in the ``` PirexGmx.sol ``` contract will be the most used; A lower method ID may be given.
+```
 
-**Proof of Consept:**
-https://medium.com/joyso/solidity-how-does-function-name-affect-gas-consumption-in-smart-contract-47d270d8ac92
 
-PirexGmx.sol function names can be named and sorted according to METHOD ID
+**Proof Of Concept:**
+The optimizer was turned on and set to 10000 runs.
 
 ```js
-Sighash   |   Function Signature
-========================
-57508589  =>  _calculateRewards(bool,bool)
-59524400  =>  _computeAssetAmounts(Fees,uint256)
-74874323  =>  setVoteDelegate(address)
-492b669d  =>  configureGmxState()
-20587afb  =>  setFee(Fees,uint256)
-dae84c59  =>  setContract(Contracts,address)
-437a8d0a  =>  depositGmx(uint256,address)
-f83e36e6  =>  depositFsGlp(uint256,address)
-d21fe1ee  =>  _depositGlp(address,uint256,uint256,uint256,address)
-f64d0094  =>  depositGlpETH(uint256,uint256,address)
-c2ae96ef  =>  depositGlp(address,uint256,uint256,uint256,address)
-a7fe1a7f  =>  _redeemPxGlp(address,uint256,uint256,address)
-6151f1b7  =>  redeemPxGlpETH(uint256,uint256,address)
-414cc4ce  =>  redeemPxGlp(address,uint256,uint256,address)
-372500ab  =>  claimRewards()
-3e9f3619  =>  claimUserReward(address,uint256,address)
-1d3c2b2f  =>  setDelegationSpace(string,bool)
-edf187f0  =>  clearVoteDelegate()
-cdb88ad1  =>  setPauseState(bool)
-71726c92  =>  initiateMigration(address)
-24fcd907  =>  migrateReward()
-6ac844be  =>  completeMigration(address)
+contract GasTest is DSTest {
+    Contract0 c0;
+    Contract1 c1;
+
+    function setUp() public {
+        c0 = new Contract0();
+        c1 = new Contract1();
+
+    }
+        function testGas() public {
+            c0.depositGmx(5,200_000);
+            c1.depositGmx(5,200_000);            
+        }
+}
+
+contract Contract0 {
+
+    uint256 constant FEE_DENOMINATOR = 1_000_000;
+
+    function depositGmx(uint256 amount, uint256 f)  external {
+        (uint256 postFeeAmount, uint256 feeAmount) = _computeAssetAmounts(f,amount);
+    }
+
+     function _computeAssetAmounts(uint f, uint256 assets) internal view returns (uint256 postFeeAmount, uint256 feeAmount) {
+        feeAmount = (assets * f ) / FEE_DENOMINATOR;
+        postFeeAmount = assets - feeAmount;
+
+        assert(feeAmount + postFeeAmount == assets);
+    }
+}
+
+contract Contract1 {
+
+    uint256 constant FEE_DENOMINATOR = 1_000_000;
+
+    function depositGmx(uint256 amount, uint256 f)  external {
+        (uint256 postFeeAmount, uint256 feeAmount) = _computeAssetAmounts(f,amount);
+    }
+
+     function _computeAssetAmounts(uint f, uint256 assets) internal view returns (uint256 postFeeAmount, uint256 feeAmount) {
+        feeAmount = (assets * f ) / FEE_DENOMINATOR;
+        postFeeAmount = assets - feeAmount;
+
+    }
+} 
+
 ```
+**Gas Report:**
+
+```js
+| src/test/test.sol:Contract0 contract |                 |     |        |     |         |
+|--------------------------------------|-----------------|-----|--------|-----|---------|
+| Deployment Cost                      | Deployment Size |     |        |     |         |
+| 102347                               | 543             |     |        |     |         |
+| Function Name                        | min             | avg | median | max | # calls |
+| depositGmx                           | 608             | 608 | 608    | 608 | 1       |
+
+
+| src/test/test.sol:Contract1 contract |                 |     |        |     |         |
+|--------------------------------------|-----------------|-----|--------|-----|---------|
+| Deployment Cost                      | Deployment Size |     |        |     |         |
+| 83329                                | 448             |     |        |     |         |
+| Function Name                        | min             | avg | median | max | # calls |
+| depositGmx                           | 518             | 518 | 518    | 518 | 1       |
+
+```
+
+
+
 ### [G-04] Use ``assembly`` to write _address storage values_ 
 
 
@@ -535,6 +592,50 @@ contract Contract1 {
 UUPS proxies are a lot simpler than Transparent, and they only have the logic for delegating the call. This makes them much cheaper to deploy, and each all has half the overhead (just a single SLOAD).
 
 https://twitter.com/smpalladino/status/1389939166109212675?s=20&t=Nd7ssD9sC_BNTtQF8lnxNg
+
+### [G-09] Optimize names to save gas [22 gas per instance]
+
+**Context:** 
+All Contracts
+
+**Description:** 
+Contracts most called functions could simply save gas by function ordering via ```Method ID```. Calling a function at runtime will be cheaper if the function is positioned earlier in the order (has a relatively lower Method ID) because ```22 gas``` are added to the cost of a function for every position that came before it. The caller can save on gas if you prioritize most called functions. 
+
+**Recommendation:** 
+Find a lower ```method ID``` name for the most called functions for example Call() vs. Call1() is cheaper by ```22 gas```
+For example, the function IDs in the ``` PirexGmx.sol ``` contract will be the most used; A lower method ID may be given.
+
+**Proof of Consept:**
+https://medium.com/joyso/solidity-how-does-function-name-affect-gas-consumption-in-smart-contract-47d270d8ac92
+
+PirexGmx.sol function names can be named and sorted according to METHOD ID
+
+```js
+Sighash   |   Function Signature
+========================
+57508589  =>  _calculateRewards(bool,bool)
+59524400  =>  _computeAssetAmounts(Fees,uint256)
+74874323  =>  setVoteDelegate(address)
+492b669d  =>  configureGmxState()
+20587afb  =>  setFee(Fees,uint256)
+dae84c59  =>  setContract(Contracts,address)
+437a8d0a  =>  depositGmx(uint256,address)
+f83e36e6  =>  depositFsGlp(uint256,address)
+d21fe1ee  =>  _depositGlp(address,uint256,uint256,uint256,address)
+f64d0094  =>  depositGlpETH(uint256,uint256,address)
+c2ae96ef  =>  depositGlp(address,uint256,uint256,uint256,address)
+a7fe1a7f  =>  _redeemPxGlp(address,uint256,uint256,address)
+6151f1b7  =>  redeemPxGlpETH(uint256,uint256,address)
+414cc4ce  =>  redeemPxGlp(address,uint256,uint256,address)
+372500ab  =>  claimRewards()
+3e9f3619  =>  claimUserReward(address,uint256,address)
+1d3c2b2f  =>  setDelegationSpace(string,bool)
+edf187f0  =>  clearVoteDelegate()
+cdb88ad1  =>  setPauseState(bool)
+71726c92  =>  initiateMigration(address)
+24fcd907  =>  migrateReward()
+6ac844be  =>  completeMigration(address)
+```
 
 ### [S-01] Use `v4.8.0 OpenZeppelin` contracts
 
