@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "carrotsmuggler",
+  "risk": "3",
+  "title": "First user of autocompounding vaults (AutoPxGlp and AutoPxGmx) can cause loss of funds for later users",
+  "issueId": 151,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/151"
+}
