@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "subtle77",
+  "risk": "2",
+  "title": "No storage gap for upgradeable contract",
+  "issueId": 154,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/154"
+}
