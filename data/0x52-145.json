@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "0x52",
+  "risk": "2",
+  "title": "Changing platform on AutoPxGlp or AutoPxGmx will brick contract",
+  "issueId": 145,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/145"
+}
