@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "0x52",
+  "risk": "2",
+  "title": "Adversary can steal rewards with AutoPxGmx#compound and AutoPxGlp#compound",
+  "issueId": 141,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/141"
+}
