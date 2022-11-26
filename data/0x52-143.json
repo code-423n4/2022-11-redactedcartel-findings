@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "0x52",
+  "risk": "2",
+  "title": "Adversary can claim pxGmx for AutoPxGlp vault and break pxGmx internal accounting",
+  "issueId": 143,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/143"
+}
