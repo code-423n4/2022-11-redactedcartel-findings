@@ -35,8 +35,9 @@ Total 10 issues
 | [N-15] |Use a single file for all system-wide constants| 6 |
 | [N-16] |`Function writing` that does not comply with the `Solidity Style Guide`| All |
 | [N-17] |Missing Upgrade Path for `PirexRewards` Implementation| 1 |
+| [N-18] | No need `assert` check in `_computeAssetAmounts()` | 1 |
 
-Total 17 issues
+Total 18 issues
 
 ### Suggestions
 | Number | Suggestion Details |
@@ -725,6 +726,30 @@ src/PirexRewards.sol:
 With the current and contracts, it is not possible to upgrade the contract. 
 
 Recommendation: Document the operational plan for contract upgrades. Also, consider using the UUPS proxy pattern to upgrade contract implementation.
+
+### [NC-18] No need `assert` check in `_computeAssetAmounts()`
+
+The `assert` check in this function is not needed. Because this check will always be true because of this line:
+ `postFeeAmount = assets - feeAmount;`
+
+**Context:**
+```diff
+src/PirexGmx.sol:
+  216       */
+  217:     function _computeAssetAmounts(Fees f, uint256 assets)
+  218:         internal
+  219:         view
+  220:         returns (uint256 postFeeAmount, uint256 feeAmount)
+  221:     {
+  222: 
+  223: 
+  224:         feeAmount = (assets * fees[f]) / FEE_DENOMINATOR;
+  225:         postFeeAmount = assets - feeAmount;
+  226: 
+- 227:       assert(feeAmount + postFeeAmount == assets);
+  228:     }
+
+```
 
 
 ### [S-01] Generate perfect code headers every time
