@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "ladboy233",
+  "risk": "2",
+  "title": "there is a 15 min cooldown duration after minting GLP in GMX, user can DOS (block) the PirexGmx.sol#redeemPxGlp call by keep extending the 15 minutes cooldown by calling AutoPxGlp#depositGlp with a small amount of Glp",
+  "issueId": 161,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/161"
+}
