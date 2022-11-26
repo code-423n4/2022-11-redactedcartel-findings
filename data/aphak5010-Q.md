@@ -4,6 +4,7 @@
 | ----------- | ----------- | ----------- | ----------- |
 | L-00      | No zero address check and 2-Step-Transfer in solmate/auth/Owned.sol | - | 4 |
 | L-01      | Missing `whenNotPaused` modifier | PirexGmx.sol | 2 |
+| L-02      | Unsafe check that addres is a contract | PirexRewards.sol | 1 |
 | N-00      | Event is missing indexed fields | - | 34 |
 | N-01      | Variable can be declared `immutable` | PxGmxReward.sol | 1 |
 | N-02      | Comment not according to logic | - | 3 |
@@ -33,6 +34,21 @@ So one must assume that when the contract is paused, the gmx state variables mig
 However the `claimUserReward` and `claimRewards` functions rely on the state to be configured correctly. So they should only be callable when the contract is not paused.  
 
 In the worst case that the old gmx state behaves very badly, a loss of funds might occur by calling the `claimRewards` or `claimUserReward` function.  
+
+## [L-02] Unsafe check that addres is a contract
+The `PirexRewards.setRewardRecipientPrivileged` and `PirexRewards.unsertRewardRecipientPrivileged` functions check that the `lpContract` parameter is the address of a contract by checking the `code.length` property.  
+
+[https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexRewards.sol#L438](https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexRewards.sol#L438)  
+
+[https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexRewards.sol#L466](https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexRewards.sol#L466)  
+
+This is an unsafe way to check if the address is the address of a contract because a contract can temporarily sefldestruct and be recreated by using `CREATE2`.  
+
+This means that a contract can be set using the `setRewardRecipientPrivileged` function but cannot be unsert anymore using the `unsetRewardRecipientPrivileged` function if the contract uses `selfdestruct`.  
+
+In the function documentation it is mentioned that the functions will only be used to handle `Pirex-GMX` LP contracts ([https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexRewards.sol#L424-L427](https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexRewards.sol#L424-L427)). So there should hopefuilly be no issue as long as the functions are used as intended.  
+
+However I think this information might still be helpful to you.  
 
 ## [N-00] Event is missing indexed fields
 Each event should use three indexed fields if it has three or more fields.  
