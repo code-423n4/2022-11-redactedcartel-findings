@@ -9,9 +9,10 @@
 | [LOW&#x2011;4](#LOW&#x2011;4) | The `nonReentrant` modifier should occur before all other modifiers | 6 |
 | [LOW&#x2011;5](#LOW&#x2011;5) | Owner can renounce Ownership | 1 |
 | [LOW&#x2011;6](#LOW&#x2011;6) | `require()` should be used instead of `assert()` | 1 |
+| [LOW&#x2011;7](#LOW&#x2011;7) | `whenPaused` modifier should apply to additional functions | 1 |
 
 
-Total: 12 contexts over 6 issues
+Total: 13 contexts over 7 issues
 
 ### Non-critical Issues
 | |Issue|Contexts|
@@ -256,6 +257,17 @@ Prior to solidity version 0.8.0, hitting an assert consumes the remainder of the
 
 https://github.com/code-423n4/2022-11-redactedcartel/tree/main/src/PirexGmx.sol#L225
 
+### <a href="#Summary">[LOW&#x2011;7]</a><a name="LOW&#x2011;7"> `whenPaused` modifier should apply to additional functions
+
+In `PirexGmx.sol` contract the `whenPaused` modifier is applied to states changes such as the function `configureGmxState`.
+As a result, the `whenPaused` modifier should also apply to other similar functions.
+
+#### Proof of Concept
+`whenPaused` modifier should apply to following functions as well:
+```solidity
+function setContract(Contracts c, address contractAddress)
+```
+https://github.com/code-423n4/2022-11-redactedcartel/tree/main/src/PirexGmx.sol#L313
 
 
 ## Non Critical Issues
@@ -740,3 +752,5 @@ Some emitted events do not have any emitted parameters. It is recommended to add
 ```
 
 https://github.com/code-423n4/2022-11-redactedcartel/tree/main/src/PirexGmx.sol#L896
+
+
