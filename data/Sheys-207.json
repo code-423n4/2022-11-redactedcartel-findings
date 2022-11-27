@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "Sheys",
+  "risk": "2",
+  "title": "Inaccurate global and user state's reward values due to overflow. It could also revert in some cases",
+  "issueId": 207,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/207"
+}
