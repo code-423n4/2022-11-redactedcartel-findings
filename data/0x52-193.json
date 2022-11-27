@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "0x52",
+  "risk": "2",
+  "title": "PirexGMX migration can always be DOS'd if owner is multisig",
+  "issueId": 193,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/193"
+}
