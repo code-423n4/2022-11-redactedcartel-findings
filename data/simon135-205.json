@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "simon135",
+  "risk": "3",
+  "title": "An attacker can sandwich the compound function when used in the contract because the slippage allowed   is 99%",
+  "issueId": 205,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/205"
+}
