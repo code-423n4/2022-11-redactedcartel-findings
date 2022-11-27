@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "0xSmartContract",
+  "risk": "2",
+  "title": "ERC-4626 Vault Has Rounding Issue",
+  "issueId": 197,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/197"
+}
