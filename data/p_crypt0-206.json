@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "p_crypt0",
+  "risk": "2",
+  "title": "Medium 1: Risky IF statement in PxERC20.sol transferFrom function can allow allowance variable to not update under certain conditions.",
+  "issueId": 206,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/206"
+}
