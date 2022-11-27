@@ -125,3 +125,5 @@ it can really not work when the tokens are going through a loop and the amounts 
 ```
 https://github.com/code-423n4/2022-11-redactedcartel/blob/684627b7889e34ba7799e50074d138361f0f532b/src/PirexRewards.sol#L418
 make sure the calculation is good and make a limit for how many `rewardTokens` you can loop through
+##### centralization risk, the minter and burner can mint any number of tokens and burn any number of tokens
+https://github.com/code-423n4/2022-11-redactedcartel/blob/684627b7889e34ba7799e50074d138361f0f532b/src/PxERC20.sol#L46
