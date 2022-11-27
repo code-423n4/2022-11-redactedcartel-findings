@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "8olidity",
+  "risk": "3",
+  "title": "Malicious users can manipulate the amount of `rewards`",
+  "issueId": 169,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/169"
+}
