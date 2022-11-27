@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "Koolex",
+  "risk": "2",
+  "title": "Loss of user rewards if rewards tokens is empty when claiming rewards",
+  "issueId": 194,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/194"
+}
