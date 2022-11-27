@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "unforgiven",
+  "risk": "2",
+  "title": "broken logic in configureGmxState() of PirexGmx contract because it doesn't properly call safeApprove() for stakedGmx address",
+  "issueId": 214,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/214"
+}
