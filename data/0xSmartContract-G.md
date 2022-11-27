@@ -11,8 +11,9 @@
 | [G-07] | Functions guaranteed to revert_ when callled by normal users can be marked `payable`   | 8 |
 | [G-08] | Project file uses Transparent Proxy model but UUPS model is cheaper| 1 |
 | [G-09] | Optimize names to save gas | All |
+| [G-10] | Remove `tokenAmount` and `msg.value` check in the `_depositGlp` function [3 K  Gas Saved ] | 1|
 
-Total 9 issues
+Total 10 issues
 
 ### Suggestions
 | Number | Suggestion Details |
@@ -635,6 +636,38 @@ cdb88ad1  =>  setPauseState(bool)
 71726c92  =>  initiateMigration(address)
 24fcd907  =>  migrateReward()
 6ac844be  =>  completeMigration(address)
+```
+
+### [G-10] Remove `tokenAmount` and `msg.value` check in the `_depositGlp` function
+
+Checking `tokenAmount` and msg.value in `_depositGlp` function `if (tokenAmount == 0) revert ZeroAmount();`. done with, but it is not necessary
+Because these are done in the interacted RewardRouterV2.sol
+
+By removing this Require, approximately 3k gas is saved
+
+[RewardRouterV2.sol - mintAndStakeGlp](https://arbiscan.io/address/0xA906F338CB21815cBc4Bc87ace9e68c87eF8d8F1#code#F1#L129)
+[RewardRouterV2.sol - mintAndStakeETH](https://arbiscan.io/address/0xA906F338CB21815cBc4Bc87ace9e68c87eF8d8F1#code#F1#L142)
+
+
+```js
+src/PirexGmx.sol:
+  534       */
+  535:     function _depositGlp(
+  536:         address token,
+  537:         uint256 tokenAmount,
+  538:         uint256 minUsdg,
+  539:         uint256 minGlp,
+  540:         address receiver
+  541:     )
+  542:         internal
+  543:         returns (
+  544:             uint256 deposited,
+  545:             uint256 postFeeAmount,
+  546:             uint256 feeAmount
+  547:         )
+  548:     {
+  549:         if (tokenAmount == 0) revert ZeroAmount();
+
 ```
 
 ### [S-01] Use `v4.8.0 OpenZeppelin` contracts
