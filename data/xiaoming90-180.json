@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "xiaoming90",
+  "risk": "3",
+  "title": "Vault Share Calculation Can Be Broken By First User/Attacker",
+  "issueId": 180,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/180"
+}
