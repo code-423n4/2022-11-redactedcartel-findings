@@ -39,36 +39,6 @@ https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fd
 
 Multiple value of `FEE_PERCENT_DENOMINATOR` is used across the codebase, this might easily lead to configuration mistake.
 
-### ReentrancyGuard is not initialized
-
-https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/vaults/AutoPxGlp.sol#L66-L88
-
-```solidity
-    constructor(
-        address _gmxBaseReward,
-        address _asset,
-        address _pxGmx,
-        string memory _name,
-        string memory _symbol,
-        address _platform,
-        address _rewardsModule
-    ) PxGmxReward(_pxGmx) PirexERC4626(ERC20(_asset), _name, _symbol) {
-        if (_gmxBaseReward == address(0)) revert ZeroAddress();
-        if (_asset == address(0)) revert ZeroAddress();
-        if (bytes(_name).length == 0) revert InvalidAssetParam();
-        if (bytes(_symbol).length == 0) revert InvalidAssetParam();
-        if (_platform == address(0)) revert ZeroAddress();
-        if (_rewardsModule == address(0)) revert ZeroAddress();
-
-        gmxBaseReward = ERC20(_gmxBaseReward);
-        platform = _platform;
-        rewardsModule = _rewardsModule;
-
-        // Approve the Uniswap V3 router to manage our base reward (inbound swap token)
-        gmxBaseReward.safeApprove(address(_platform), type(uint256).max);
-    }
-```
-
 ### Do not use assert() in production
 
 `assert()` will consume all gas, use `require()` instead
