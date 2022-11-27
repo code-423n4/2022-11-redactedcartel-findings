@@ -68,3 +68,14 @@ https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fd
         gmxBaseReward.safeApprove(address(_platform), type(uint256).max);
     }
 ```
+
+### Do not use assert() in production
+
+`assert()` will consume all gas, use `require()` instead
+
+https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexGmx.sol#L225-L226
+
+```solidity
+        assert(feeAmount + postFeeAmount == assets);
+
+```
