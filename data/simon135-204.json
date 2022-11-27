@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "simon135",
+  "risk": "2",
+  "title": "An attacker can skip fees getting called and just get the  `incentive` and reenter and the owner wont get the fees until the contracts is not able to be compounded again",
+  "issueId": 204,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/204"
+}
