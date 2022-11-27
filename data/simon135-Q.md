@@ -106,3 +106,22 @@ https://github.com/code-423n4/2022-11-redactedcartel/blob/684627b7889e34ba7799e5
         u.rewards = rewards;
 
 ```
+#### certain times these calculations can revert causing issues  
+ex:
+`rewardState= 1e18`
+`userRewards=100`
+`globalRewards=10`
+```
+(1e18 *100) / 10= 1e19
+```
+it can really not work when the tokens are going through a loop and the amounts get bigger causing a revert at the end of the loop and making the function revert and rewards won't work.
+```js
+        uint256 rewardState = p.rewardStates[rewardToken];
+                uint256 amount = (rewardState * userRewards) / globalRewards;
+
+                if (amount != 0) {
+                    // Update reward state (i.e. amount) to reflect reward tokens transferred out
+                    p.rewardStates[rewardToken] = rewardState - amount;
+```
+https://github.com/code-423n4/2022-11-redactedcartel/blob/684627b7889e34ba7799e50074d138361f0f532b/src/PirexRewards.sol#L418
+make sure the calculation is good and make a limit for how many `rewardTokens` you can loop through
