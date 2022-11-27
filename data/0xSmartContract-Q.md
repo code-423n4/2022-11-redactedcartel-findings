@@ -12,8 +12,9 @@
 |[L-08]| Loss of precision due to rounding| 1 |
 |[L-09]| First value check of argument of type enum in setFee function is missing| 1 |
 |[L-10]| Hardcode the address causes no future updates| 1 |
+|[L-11]| Lack of Input Validation | 6 |
 
-Total 10 issues
+Total 11 issues
 
 ### Non-Critical Issues List
 | Number |Issues Details|Context|
@@ -335,6 +336,81 @@ src/vaults/AutoPxGmx.sol:
 ```
 
 Router etc. In case the addresses change due to reasons such as updating their versions in the future, addresses coded as constants cannot be updated, so it is recommended to add the update option with the onlyOwner modifier.
+
+
+### [L-11] Lack of Input Validation
+
+For defence-in-depth purpose, it is recommended to perform additional validation against the amount that the user is attempting to deposit, mint, withdraw and redeem to ensure that the submitted amount is valid.
+
+[OpenZeppelinTokenizedVault.sol#L9](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/7c75b8aa89073376fb67d78a40f6d69331092c94/contracts/token/ERC20/extensions/ERC20TokenizedVault.sol#L95)
+
+
+```diff
+src/PirexGmx.sol:
+  429       */
+  430:     function depositGmx(uint256 amount, address receiver)
+  431:         external
+  432:         whenNotPaused
+  433:         nonReentrant
+  434:         returns (
+  435:             uint256,
+  436:             uint256,
+  437:             uint256
+  438:         )
+  439:     {
++	         require(amount <= maxDeposit(receiver), "deposit more than max");
+```
+
+```diff
+src/vaults/PirexERC4626.sol:
+  79  
+  80:     function mint(uint256 shares, address receiver)
+  81:         public
+  82:         virtual
+  83:         returns (uint256 assets)
+  84:     {
++ 	       require(shares <= maxMint(receiver), "mint more than max");
+
+```
+
+```diff
+src/vaults/AutoPxGlp.sol:
+  438:     function withdraw(
+  439:         uint256 assets,
+  440:         address receiver,
+  441:         address owner
+  442:     ) public override returns (uint256 shares) {
++                require(assets <= maxWithdraw(owner), "withdraw more than max");
+
+src/vaults/AutoPxGmx.sol:
+  317:     function withdraw(
+  318:         uint256 assets,
+  319:         address receiver,
+  320:         address owner
+  321:     ) public override returns (uint256 shares) {
++               require(assets <= maxWithdraw(owner), "withdraw more than max");
+```
+
+
+```diff
+src/vaults/AutoPxGlp.sol:
+  450       */
+  451:     function redeem(
+  452:         uint256 shares,
+  453:         address receiver,
+  454:         address owner
+  455:     ) public override returns (uint256 assets) {
++               require(shares <= maxRedeem(owner), "redeem more than max");
+
+src/vaults/AutoPxGmx.sol:
+  340  
+  341:     function redeem(
+  342:         uint256 shares,
+  343:         address receiver,
+  344:         address owner
+  345:     ) public override returns (uint256 assets) {
++                require(shares <= maxRedeem(owner), "redeem more than max");
+```
 
 ### [NC-01] Insufficient coverage
 
