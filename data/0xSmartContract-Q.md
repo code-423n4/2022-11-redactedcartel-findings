@@ -37,8 +37,10 @@ Total 11 issues
 | [N-16] |`Function writing` that does not comply with the `Solidity Style Guide`| All |
 | [N-17] |Missing Upgrade Path for `PirexRewards` Implementation| 1 |
 | [N-18] | No need `assert` check in `_computeAssetAmounts()` | 1 |
+| [N-19] | Lack of event emission after critical `initialize()` functions | 1 |
+| [N-20] | Add a timelock to critical functions | 11 |
 
-Total 18 issues
+Total 19 issues
 
 ### Suggestions
 | Number | Suggestion Details |
@@ -826,6 +828,74 @@ src/PirexGmx.sol:
   228:     }
 
 ```
+### [NC-19] Lack of event emission after critical `initialize()` functions
+
+To record the init parameters for off-chain monitoring and transparency reasons, please consider emitting an event after the `initialize()` functions:
+
+```solidity
+src/PirexRewards.sol:
+  84  
+  85:     function initialize() public initializer {
+  86:         __Ownable_init();
+  87:     }
+
+```
+
+### [NC-20] Add a timelock to critical functions
+
+It is a good practice to give time for users to react and adjust to critical changes. A timelock provides more guarantees and reduces the level of trust required, thus decreasing risk for users. It also indicates that the project is legitimate (less risk of a malicious owner making a sandwich attack on a user).
+Consider adding a timelock to:
+
+```solidity
+
+11 results 
+
+
+src/PirexGmx.sol:
+  351       */
+  352:     function setFee(Fees f, uint256 fee) external onlyOwner {
+  353          if (fee > FEE_MAX) revert InvalidFee();
+
+  364       */
+  365:     function setContract(Contracts c, address contractAddress)
+  366          external
+
+  918       */
+  919:     function setDelegationSpace(
+  920          string memory _delegationSpace,
+
+  940       */
+  941:     function setVoteDelegate(address voteDelegate) external onlyOwner {
+  942          if (voteDelegate == address(0)) revert ZeroAddress();
+
+  965      */
+  966:     function setPauseState(bool state) external onlyOwner {
+  967          if (state) {
+
+
+src/vaults/AutoPxGlp.sol:
+   94:     function setWithdrawalPenalty(uint256 penalty) external onlyOwner {
+   95          if (penalty > MAX_WITHDRAWAL_PENALTY) revert ExceedsMax();
+
+  106:     function setPlatformFee(uint256 fee) external onlyOwner {
+  107          if (fee > MAX_PLATFORM_FEE) revert ExceedsMax();
+
+
+src/vaults/AutoPxGmx.sol:
+  104:     function setPoolFee(uint24 _poolFee) external onlyOwner {
+  105          if (_poolFee == 0) revert ZeroAmount();
+
+  116:     function setWithdrawalPenalty(uint256 penalty) external onlyOwner {
+  117          if (penalty > MAX_WITHDRAWAL_PENALTY) revert ExceedsMax();
+
+  128:     function setPlatformFee(uint256 fee) external onlyOwner {
+  129          if (fee > MAX_PLATFORM_FEE) revert ExceedsMax();
+
+  152:     function setPlatform(address _platform) external onlyOwner {
+  153          if (_platform == address(0)) revert ZeroAddress();
+
+```
+
 
 
 ### [S-01] Generate perfect code headers every time
@@ -840,6 +910,7 @@ https://github.com/transmissions11/headers
                            TESTING 123
 //////////////////////////////////////////////////////////////*/
 ```
+
 ### [S-02] Add NatSpec comments to the variables defined in Storage
 
 **Description:**
