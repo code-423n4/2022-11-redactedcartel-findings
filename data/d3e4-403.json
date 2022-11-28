@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "d3e4",
+  "risk": "3",
+  "title": "`gmxBaseReward` must not be the same as `asset`",
+  "issueId": 403,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/403"
+}
