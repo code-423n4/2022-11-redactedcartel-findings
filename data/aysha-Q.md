@@ -15,8 +15,8 @@ Use:
 token.safeApprove(0);
 token.safeApprove(_amount);
 This is safe to use on all generic implementations of ERC20s!
-Or use
-safeIncreaseAllowance() and safeDecreaseAllowance()
+This still costs more gas than just using safeIncreaseAllowance() once, so an optimizer should choose to use safeIncreaseAllowance() on known/whitelisted groups of tokens that support it.
+
 
 https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/vaults/AutoPxGlp.sol#L391
 ==========================================================
