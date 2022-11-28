@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "Jeiwan",
+  "risk": "2",
+  "title": "`PirexRewards` implementation is not initialized, allowing impersonation",
+  "issueId": 270,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/270"
+}
