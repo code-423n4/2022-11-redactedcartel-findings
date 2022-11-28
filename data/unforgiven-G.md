@@ -1,0 +1,2 @@
+**[[1]]** function `distributeFees()` in `PirexFees` don't check the amount>0 that is going to get transferred but all other places in the code has this check for fee. contract send `contributorsDistribution`  and `treasuryDistribution` amount of token without check that the `amount != 0`. this would cause a lot of unnecessary gas if balance of contract was zero or `treasuryFeePercent` was zero.
+https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexFees.sol#L96-L116
