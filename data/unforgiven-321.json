@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "unforgiven",
+  "risk": "3",
+  "title": "fee loss in AutoPxGmx and AutoPxGlp and reward loss in AutoPxGlp by calling PirexRewards.claim(pxGmx/pxGpl, AutoPx*) directly which transfers rewards to  AutoPx* pool without  compound logic get executed and fee calculation logic and pxGmx wouldn't be executed for those rewards",
+  "issueId": 321,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/321"
+}
