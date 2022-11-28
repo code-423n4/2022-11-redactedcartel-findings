@@ -127,3 +127,35 @@ https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fd
 https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PxGmx.sol#L10
 
 https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/vaults/PirexERC4626.sol#L48
+
+### Event is missing indexed fields
+
+Index event fields make the field more quickly accessible to off-chain tools that parse events. However, note that each 
+index field costs extra gas during emission, so it's not necessarily best to index the maximum allowed per event 
+(threefields). Each event should use three indexed fields if there are three or more fields, and gas usage is not 
+particularly of concern for the events in question. If there are fewer than three fields, all of the fields should be indexed.
+
+https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexFees.sol#L34, L35, L97, L86,  L215, L133
+https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexGmx.sol#L140 - L144
+https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexRewards.sol#L50 , L56, L63
+https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/vaults/AutoPxGlp.sol#L35, L37, L38, L39
+https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/vaults/AutoPxGmx.sol#L39, L40, L41, L41, L43, L44
+
+### boilerplate not removed, consider doing so before deployment live
+
+https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/vaults/PirexERC4626.sol#L10
+
+### Lack of pause on critical changes
+
+pirexGmx.sol allows for the setting of contracts address such as Pirexfees, IRewardRouterv2 etc, yet there is no mechanism
+in place to pause the current contract so that users are not interacting with possibly a mix of old and new contracts.
+
+https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexGmx.sol#L313
+
+currently these address can be changed at any time.
+
+consider adding into this function some pause mechanism so that when new contracts address are added users cannot interact with old and new contracts due to the use of old and new address's while in the migration proccess to new address, as this function updates contracts critical to the protocol/project, there should be some time based logic built into the upgrade/migration to new address's also so that users are made aware and/or can make an preperations needed
+
+
+
+
