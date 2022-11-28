@@ -6,7 +6,7 @@ When calling `PirexFeeds.distributeFees()`, if an incorrect erc20 tokens is pass
 
 https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexFees.sol#L100-L116
 
-## Recommendationc
+## Recommendation
 
 Add a check for contract existence. E.g. `if (address(token).code.length == 0) revert CustomError()` while using Solmate SafeTransferLib.
 
