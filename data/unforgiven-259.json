@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "unforgiven",
+  "risk": "3",
+  "title": "user fund lose in deposit() of PirexERC4626 contract because A MALICIOUS EARLY USER/ATTACKER CAN MANIPULATE THE VAULT’S PRICEPERSHARE TO TAKE AN UNFAIR SHARE OF FUTURE USERS’ DEPOSITS",
+  "issueId": 259,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/259"
+}
