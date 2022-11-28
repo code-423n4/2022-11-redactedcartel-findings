@@ -31,3 +31,12 @@ Although `beforeWithdraw()` and `afterWithdraw()` are empty functions now, it is
 The simplier way is call `PirexERC4626.withdraw(assets, receiver, owner);` and `PirexERC4626.redeem(shares, receiver, owner);` instead,
 just like [`AutoPxGlp.withdraw`](https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/vaults/AutoPxGlp.sol#L443) and [`AutoPxGlp.redeem`](https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/vaults/AutoPxGlp.sol#L456) did.
 
+## 04. Missing whenPaused in setContract()
+The [PirexGmx.sol#setContract()](https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexGmx.sol#L313) is a function that makes major changes to the contract like [PirexGmx.sol#configureGmxState()](https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexGmx.sol#L272).
+
+To be safe, `setContract()` should have the modifier `whenPaused` as `configureGmxState()` for 
+
+## 05. PirexGmx.sol#claimUserReward() should revert if token is unknown
+In [PirexGmx.sol#claimUserReward()](https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexGmx.sol#L824), the call will pass and event ClaimUserReward is [emitted](https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexGmx.sol#L850), even if the token is unknown.
+
+Should add an else branch at [PirexGmx.sol#L848](https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexGmx.sol#L848) to revert when the token is unknown.
