@@ -16,7 +16,7 @@
 | [GAS&#x2011;11](#GAS&#x2011;11) | Variables can be packed into fewer storage slots | 4 | - |
 | [GAS&#x2011;12](#GAS&#x2011;12) | Setting the `constructor` to `payable` | 8 | 104 |
 | [GAS&#x2011;13](#GAS&#x2011;13) | Functions guaranteed to revert when called by normal users can be marked `payable` | 32 | 672 |
-
+| [GAS&#x2011;14](#GAS&#x2011;14) | Use `unchecked` on calculations that cannot go negative | 3 | - |
 
 
 Total: 116 contexts over 13 issues
@@ -1060,3 +1060,55 @@ https://github.com/code-423n4/2022-11-redactedcartel/tree/main/src/vaults/AutoPx
 
 #### <ins>Recommended Mitigation Steps</ins>
 Functions guaranteed to revert when called by normal users can be marked payable.
+
+
+
+### <a href="#Summary">[GAS&#x2011;14]</a><a name="GAS&#x2011;14"> Use `unchecked` on calculations that cannot go negative
+
+#### <ins>Proof Of Concept</ins>
+
+```solidity
+104: uint256 contributorsDistribution = distribution - treasuryDistribution;
+```
+
+Change to:
+
+```solidity
+unchecked {
+    uint256 contributorsDistribution = distribution - treasuryDistribution;
+}
+```
+https://github.com/code-423n4/2022-11-redactedcartel/tree/main/src/PirexFees.sol#L104
+
+
+```solidity
+223: postFeeAmount = assets - feeAmount;
+```
+
+Change to:
+
+```solidity
+unchecked {
+    postFeeAmount = assets - feeAmount;
+}
+```
+https://github.com/code-423n4/2022-11-redactedcartel/tree/main/src/PirexGmx.sol#L223
+
+
+```solidity
+798: rewardAmounts[1] = baseRewards - rewardAmounts[0];
+805: rewardAmounts[3] = esGmxRewards - rewardAmounts[2];
+```
+
+Change to:
+
+```solidity
+unchecked {
+    rewardAmounts[1] = baseRewards - rewardAmounts[0];
+    rewardAmounts[3] = esGmxRewards - rewardAmounts[2];
+}
+```
+
+https://github.com/code-423n4/2022-11-redactedcartel/tree/main/src/PirexGmx.sol#L798
+
+https://github.com/code-423n4/2022-11-redactedcartel/tree/main/src/PirexGmx.sol#L805
