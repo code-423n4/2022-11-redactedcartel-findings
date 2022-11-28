@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "soumetsu",
+  "risk": "2",
+  "title": "Unexpected return values for some sets of parameters passed into _computeAssetAmounts",
+  "issueId": 343,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/343"
+}
