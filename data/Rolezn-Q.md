@@ -10,9 +10,9 @@
 | [LOW&#x2011;5](#LOW&#x2011;5) | Owner can renounce Ownership | 1 |
 | [LOW&#x2011;6](#LOW&#x2011;6) | `require()` should be used instead of `assert()` | 1 |
 | [LOW&#x2011;7](#LOW&#x2011;7) | `whenPaused` modifier should apply to additional functions | 1 |
+| [LOW&#x2011;8](#LOW&#x2011;8) | Loss of precision due to rounding | 1 |
 
-
-Total: 13 contexts over 7 issues
+Total: 14 contexts over 8 issues
 
 ### Non-critical Issues
 | |Issue|Contexts|
@@ -268,6 +268,28 @@ As a result, the `whenPaused` modifier should also apply to other similar functi
 function setContract(Contracts c, address contractAddress)
 ```
 https://github.com/code-423n4/2022-11-redactedcartel/tree/main/src/PirexGmx.sol#L313
+
+
+### <a href="#Summary">[LOW&#x2011;8]</a><a name="LOW&#x2011;8"> Loss of precision due to rounding
+
+Due to division by `precision`, `_calculateRewards` can return incorrect results when below the divided `precision` value
+
+#### <ins>Proof Of Concept</ins>
+
+```solidity
+261: return
+262:     r.claimableReward(address(this)) +
+263:     ((r.stakedAmounts(address(this)) *
+264:         (cumulativeRewardPerToken -
+265:             r.previousCumulatedRewardPerToken(address(this)))) /
+266:         precision);
+```
+
+https://github.com/code-423n4/2022-11-redactedcartel/tree/main/src/PirexGmx.sol#L61-L266
+
+#### <ins>Recommended Mitigation Steps</ins>
+
+Add a lower limit to calculation affected by the division of `precision`
 
 
 ## Non Critical Issues
