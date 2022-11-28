@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "0xmuxyz",
+  "risk": "2",
+  "title": "- Solmate's `safeTransfer()` and `safeTransferfrom()`  does not check the existence of the actual token contract code of the token address, which may lead to miscalculation",
+  "issueId": 223,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/223"
+}
