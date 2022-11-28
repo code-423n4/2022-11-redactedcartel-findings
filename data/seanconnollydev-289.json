@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "seanconnollydev",
+  "risk": "2",
+  "title": "Public/external functions on upgradeable contract should be virtual",
+  "issueId": 289,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/289"
+}
