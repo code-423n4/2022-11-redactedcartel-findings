@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "0xfuje",
+  "risk": "2",
+  "title": "Initialize function in PirexRewards.sol can be front-run",
+  "issueId": 297,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/297"
+}
