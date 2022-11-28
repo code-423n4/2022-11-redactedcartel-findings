@@ -15,3 +15,9 @@ During initialization, there is no address default (zero) value check. The repor
 **Path:** ./external/RewardTracker.sol : initialize(),
 ./external/vaults/PirexERC4626 : constructor()
 **Recommendation:** Add a zero check for the `_distributor`, `asset` parameters.
+
+#### L2. Pool selection for the compound is not restricted
+`Compound` function of `AutoPxGmx` contract is `public` and available for everyone. An attacker can create a custom pool with a higher fee value (currently, on tests it uses 0.3%, but it's possible to create a pool with a max of 1% fee) on Uniswap and manually execute `compound` function to drain `gmxBaseReward` from higher fees. The issue is minor while Uniswap limits pool fees to 1%, but in the future, in case it will be changed - the issue could become more critical.
+
+**Path:** ./external/vaults/AutoPxGmx.sol : compound()
+**Recommendation:** Do not allow it to pass a custom `fee` value (use fee from state variable).
