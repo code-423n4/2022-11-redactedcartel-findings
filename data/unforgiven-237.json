@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "unforgiven",
+  "risk": "2",
+  "title": "_calculateRewards() in PirexGmx don't handle reward calculation properly, and it would revert when totalSupply() is zero which will cause claimRewards() to revert if one of 4 rewardTracker's totalSupply was zero",
+  "issueId": 237,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/237"
+}
