@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "hl_",
+  "risk": "2",
+  "title": "Attackers can manipulate ERC4626 price per share to take an unfair share of future users",
+  "issueId": 339,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/339"
+}
