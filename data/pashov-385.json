@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "pashov",
+  "risk": "2",
+  "title": "Slippage protection on `AutoPxGmx::compound` calls is insufficient and can result in MEV",
+  "issueId": 385,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/385"
+}
