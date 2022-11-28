@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "rotcivegaf",
+  "risk": "2",
+  "title": "Variable used before assignation on function `beforeDeposit`",
+  "issueId": 334,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/334"
+}
