@@ -512,5 +512,5 @@ Consider having the relevant comment and if block added before line 289 so that 
 
         ...
 ```
-
+Note: The second condition `balance != u.lastBalance` will help stem any malicious actor from spamming the protocol with bloated logs if `||` is relaced with `&&`. The same rationale shall apply to the if statement on line 314 too.
  
