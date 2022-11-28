@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "unforgiven",
+  "risk": "2",
+  "title": "user's reward loss because of incorrect rewardsTokens in PirexRewards contract when rewardsTokens are not configured yet or configured incorrectly",
+  "issueId": 242,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/242"
+}
