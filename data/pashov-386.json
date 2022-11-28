@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "pashov",
+  "risk": "2",
+  "title": "Owner can rug GMX depositors in `PirexGmx.sol`",
+  "issueId": 386,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/386"
+}
