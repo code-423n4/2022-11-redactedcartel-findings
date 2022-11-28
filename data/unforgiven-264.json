@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "unforgiven",
+  "risk": "3",
+  "title": "previewWithdraw() in AutoPxGlp and AutoPxGmx doesn't rounds up when calculating corresponding shares for assets, even so they are overrides previewWithdraw() in PirexERC4626 which rounds up and withdraw() in all 3 contract assumes and depends on previewWithdraw() to rounds up",
+  "issueId": 264,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/264"
+}
