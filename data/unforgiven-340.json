@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "unforgiven",
+  "risk": "3",
+  "title": "Incentive fund loss when calling claim() in AutoPxGlp/PxGmxRewards because it calls this.compound(,,true) which would transfer incentive to contract itself and those funds won't be calculated as rewards or fee and won't be accessible to withdraw",
+  "issueId": 340,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/340"
+}
