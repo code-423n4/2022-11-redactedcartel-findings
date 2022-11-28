@@ -19,7 +19,7 @@
 | [GAS&#x2011;14](#GAS&#x2011;14) | Use `unchecked` on calculations that cannot go negative | 3 | - |
 
 
-Total: 116 contexts over 13 issues
+Total: 119 contexts over 14 issues
 
 ## Gas Optimizations
 
