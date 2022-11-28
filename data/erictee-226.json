@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "erictee",
+  "risk": "2",
+  "title": "Token transfers do not verify that the tokens were successfully transferred",
+  "issueId": 226,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/226"
+}
