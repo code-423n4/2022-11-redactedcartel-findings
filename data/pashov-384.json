@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "pashov",
+  "risk": "3",
+  "title": "Code is vulnerable to ERC4626 first depositor shares manipulation exploit",
+  "issueId": 384,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/384"
+}
