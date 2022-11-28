@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "cryptonue",
+  "risk": "2",
+  "title": "Potential PirexReward's producerTokens's rewardToken unsynced with PirexGmx rewardToken can miss calculate the actual reward for user",
+  "issueId": 379,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/379"
+}
