@@ -502,6 +502,8 @@ In `PirexRewards.sol`, a similar check pertaining to `_globalAccrue()` on line 3
 
 Consider having the relevant comment and if block added before line 289 so that it will likewise be only calculating and updating states when needed as follows:
 
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol#L288-L291
+
 ```
         // Calculate the amount of rewards accrued by the user up to this call
         // Only calculate and update states when needed
