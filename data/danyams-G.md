@@ -53,3 +53,82 @@ There are 3 different for loops in PirexRewards.sol in harvest( ), claim( ), and
      }
 
 Link to referenced code: https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol
+
+# Changing the Allowance Can Be Set to An Internal Function
+
+Changing the allowance of an account for an owner is repeated 5 times in total:  2 times in PirexERC4626.sol and 3 times in AutoPxGmx.sol.  In place of copying and pasting the same code, an internal function can be used which will reduce the size of the contract bytecode and, thereby, reduce the cost of deployment.  Specifically, the CODECOPY opcode costs 3 * data_size_words + mem_expansion_cost in gas.  
+
+--- a/src/vaults/PirexERC4626.sol
++++ b/src/vaults/PirexERC4626.sol
+@@ -103,13 +103,8 @@ abstract contract PirexERC4626 is ERC20 {
+     ) public virtual returns (uint256 shares) {
+         shares = previewWithdraw(assets); // No need to check for rounding error, previewWithdraw rounds up.
+ 
+-        if (msg.sender != owner) {
+-            uint256 allowed = allowance[owner][msg.sender]; // Saves gas for limited approvals.
+-
+-            if (allowed != type(uint256).max)
+-                allowance[owner][msg.sender] = allowed - shares;
+-        }
+-
++        _updateAllowance(shares, owner);
++        
+         beforeWithdraw(owner, assets, shares);
+ 
+         _burn(owner, shares);
+@@ -126,12 +121,8 @@ abstract contract PirexERC4626 is ERC20 {
+         address receiver,
+         address owner
+     ) public virtual returns (uint256 assets) {
+-        if (msg.sender != owner) {
+-            uint256 allowed = allowance[owner][msg.sender]; // Saves gas for limited approvals.
+ 
+-            if (allowed != type(uint256).max)
+-                allowance[owner][msg.sender] = allowed - shares;
+-        }
++        _updateAllowance(shares, owner);
+ 
+         // Check for rounding error since we round down in previewRedeem.
+         require((assets = previewRedeem(shares)) != 0, "ZERO_ASSETS");
+@@ -147,6 +138,15 @@ abstract contract PirexERC4626 is ERC20 {
+         afterWithdraw(owner, assets, shares);
+     }
+ 
++    function _updateAllowance(uint256 shares, address owner) internal {
++        if (msg.sender != owner) {
++            uint256 allowed = allowance[owner][msg.sender]; // Saves gas for limited approvals.
++
++            if (allowed != type(uint256).max)
++                allowance[owner][msg.sender] = allowed - shares;
++        }
++    }
++
+
+--- a/src/vaults/AutoPxGmx.sol
++++ b/src/vaults/AutoPxGmx.sol
+@@ -322,12 +322,7 @@ contract AutoPxGmx is ReentrancyGuard, Owned, PirexERC4626 {
+ 
+         shares = previewWithdraw(assets); // No need to check for rounding error, previewWithdraw rounds up.
+ 
+-        if (msg.sender != owner) {
+-            uint256 allowed = allowance[owner][msg.sender]; // Saves gas for limited approvals.
+-
+-            if (allowed != type(uint256).max)
+-                allowance[owner][msg.sender] = allowed - shares;
+-        }
++        _updateAllowance(shares, owner);
+ 
+         _burn(owner, shares);
+ 
+@@ -344,12 +339,7 @@ contract AutoPxGmx is ReentrancyGuard, Owned, PirexERC4626 {
+         // Compound rewards and ensure they are properly accounted for prior to redemption calculation
+         compound(poolFee, 1, 0, true);
+ 
+-        if (msg.sender != owner) {
+-            uint256 allowed = allowance[owner][msg.sender]; // Saves gas for limited approvals.
+-
+-            if (allowed != type(uint256).max)
+-                allowance[owner][msg.sender] = allowed - shares;
+-        }
++        _updateAllowance(shares, owner);
+
