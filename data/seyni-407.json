@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "seyni",
+  "risk": "3",
+  "title": "A malicious early user/attacker can manipulate the pxGmx's pricePerShare to take an unfair share of future user's deposits",
+  "issueId": 407,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/407"
+}
