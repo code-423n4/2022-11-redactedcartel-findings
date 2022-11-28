@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "Amithuddar",
+  "risk": "2",
+  "title": "The transferFrom() method is used instead of safeTransferFrom()",
+  "issueId": 243,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/243"
+}
