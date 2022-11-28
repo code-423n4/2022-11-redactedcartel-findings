@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "unforgiven",
+  "risk": "3",
+  "title": "it's not possible to correctly change and update PirexGmx address in AutoPxGlp and AutoPxGmx contracts because setPlatform() don't set spending approval for new address",
+  "issueId": 287,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/287"
+}
