@@ -15,7 +15,7 @@
 
 
 ### Recommendation
-- Incrementing `i` inside `unchecked` block should be used like below:
+- Incrementing `i` inside `unchecked` block should be used.
    - eg). In case of the first unoptimized-lines (https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexRewards.sol#L163-L167), incrementing `i` inside `unchecked` block could be used like below:
 ```solidity
         for (uint256 i; i < len;) {
