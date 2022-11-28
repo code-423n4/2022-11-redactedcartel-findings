@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "cryptoDave",
+  "risk": "2",
+  "title": "Reward Token added to Producer Token after accrued rewards leading to loss/gain of rewards",
+  "issueId": 228,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/228"
+}
