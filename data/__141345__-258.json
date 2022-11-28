@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "__141345__",
+  "risk": "3",
+  "title": "Rewards calculation does not consider GMX reward rate fluctuation",
+  "issueId": 258,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/258"
+}
