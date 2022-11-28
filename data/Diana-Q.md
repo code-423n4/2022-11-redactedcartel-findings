@@ -1,5 +1,56 @@
+## 01 SAFEAPPROVE() IS DEPRECATED
 
-## 01 EVENT IS MISSING INDEXED FIELDS
+Deprecated in favor of `safeIncreaseAllowance()` and `safeDecreaseAllowance()`. If only setting the initial allowance to the value that means infinite, `safeIncreaseAllowance()` can be used instead
+
+_There are 9 instances of this issue:_
+
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol
+
+```
+File: src/PirexGmx.sol
+
+292: gmx.safeApprove(address(stakedGmx), type(uint256).max);
+348: gmx.safeApprove(address(stakedGmx), 0);
+353: gmx.safeApprove(contractAddress, type(uint256).max);
+507: t.safeApprove(glpManager, tokenAmount);
+```
+
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/vaults/AutoPxGlp.sol
+
+```
+File: src/vaults/AutoPxGlp.sol
+
+87: gmxBaseReward.safeApprove(address(_platform), type(uint256).max);
+347: stakedGlp.safeApprove(platform, amount);
+391: erc20Token.safeApprove(platform, tokenAmount);
+```
+
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/vaults/AutoPxGmx.sol
+
+```
+File: src/vaults/AutoPxGmx.sol
+
+96: gmxBaseReward.safeApprove(address(SWAP_ROUTER), type(uint256).max
+97: gmx.safeApprove(_platform, type(uint256).max);
+```
+
+--------
+
+## 02 REQUIRE() SHOULD BE USED INSTEAD OF ASSERT()
+
+_There is 1 instance of this issue_
+
+https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol
+
+```
+File: src/PirexGmx.sol
+
+225: assert(feeAmount + postFeeAmount == assets);
+```
+
+----
+
+## 03 EVENT IS MISSING INDEXED FIELDS
 
 Each `event` should use three `indexed` fields if there are three or more fields
 
@@ -90,7 +141,7 @@ File: src/vaults/PxGmxReward.sol
 
 ------
 
-## 02 USING BOTH NAMED RETURNS AND A RETURN STATEMENT ISN'T NECESSARY
+## 04 USING BOTH NAMED RETURNS AND A RETURN STATEMENT ISN'T NECESSARY
 
 Removing unused named returns variables can reduce gas usage (MSTOREs/MLOADs) and improve code clarity. To save gas and improve code quality: consider using only one of those.
 
@@ -104,56 +155,4 @@ File: src/PirexRewards.sol
 207: function getUserState(ERC20 producerToken, address user)
 ```
 
---------
-
-## 03 REQUIRE() SHOULD BE USED INSTEAD OF ASSERT()
-
-_There is 1 instance of this issue_
-
-https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol
-
-```
-File: src/PirexGmx.sol
-
-225: assert(feeAmount + postFeeAmount == assets);
-```
-
-----
-
-## 04 SAFEAPPROVE() IS DEPRECATED
-
-Deprecated in favor of `safeIncreaseAllowance()` and `safeDecreaseAllowance()`. If only setting the initial allowance to the value that means infinite, `safeIncreaseAllowance()` can be used instead
-
-_There are 9 instances of this issue:_
-
-https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/PirexGmx.sol
-
-```
-File: src/PirexGmx.sol
-
-292: gmx.safeApprove(address(stakedGmx), type(uint256).max);
-348: gmx.safeApprove(address(stakedGmx), 0);
-353: gmx.safeApprove(contractAddress, type(uint256).max);
-507: t.safeApprove(glpManager, tokenAmount);
-```
-
-https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/vaults/AutoPxGlp.sol
-
-```
-File: src/vaults/AutoPxGlp.sol
-
-87: gmxBaseReward.safeApprove(address(_platform), type(uint256).max);
-347: stakedGlp.safeApprove(platform, amount);
-391: erc20Token.safeApprove(platform, tokenAmount);
-```
-
-https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/vaults/AutoPxGmx.sol
-
-```
-File: src/vaults/AutoPxGmx.sol
-
-96: gmxBaseReward.safeApprove(address(SWAP_ROUTER), type(uint256).max
-97: gmx.safeApprove(_platform, type(uint256).max);
-```
-
-------
+---
