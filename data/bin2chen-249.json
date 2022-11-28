@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "bin2chen",
+  "risk": "2",
+  "title": "PirexGmx#migrateReward() may cause users to lose Reward.",
+  "issueId": 249,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/249"
+}
