@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "rbserver",
+  "risk": "2",
+  "title": "`AutoPxGmx.compound` function can be directly called with a `fee` input value that is not the configured Uniswap pool fee",
+  "issueId": 327,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/327"
+}
