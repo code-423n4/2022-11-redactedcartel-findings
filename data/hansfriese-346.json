@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "hansfriese",
+  "risk": "2",
+  "title": "A malicious user might call `AutoPxGmx.compound()` with a higher fee than `poolFee`.",
+  "issueId": 346,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/346"
+}
