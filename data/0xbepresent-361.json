@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "0xbepresent",
+  "risk": "2",
+  "title": "Add reward token existence check in order to avoid user reward lost.",
+  "issueId": 361,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/361"
+}
