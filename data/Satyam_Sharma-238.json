@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "Satyam_Sharma",
+  "risk": "2",
+  "title": "Sending all claimUserReward amount to zero address make all user reward lost",
+  "issueId": 238,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/238"
+}
