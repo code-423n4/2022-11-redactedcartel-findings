@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "immeas",
+  "risk": "2",
+  "title": "`compound` could be used by uniswap stakers to maximize fees for AutoPxGmx users",
+  "issueId": 391,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/391"
+}
