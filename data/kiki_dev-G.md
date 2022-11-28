@@ -1,4 +1,4 @@
-Gas OP
+Gas Optimizations
 
 
 [1] x += y cost more gas. You can use x = x + y instead.
