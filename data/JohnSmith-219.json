@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "JohnSmith",
+  "risk": "3",
+  "title": "A malicious early user/attacker can manipulate the `AutoPxGlp`'s and `AutoPxGmx`'s' price per share to take an unfair share of future users' deposi",
+  "issueId": 219,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/219"
+}
