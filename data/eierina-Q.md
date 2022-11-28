@@ -53,7 +53,7 @@ index 90c4493..abd6f42 100644
          asset.safeTransferFrom(msg.sender, address(this), assets);
 ```
 
-[LR-03] stakedGmx RewardTracker may retain allowances
+### [LR-03] Staked Gmx RewardTracker may retain allowances
 
 **Summary**: Both the [configureGmxState()](https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexGmx.sol#L272) function and the [setContract(Contracts c, address contractAddress)](https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexGmx.sol#L313) can be used to update the [PirexGmx](https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexGmx.sol#L20) contract's [stakedGmx](https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexGmx.sol#L72) storage variable with a new staked Gmx RewardTracker contract. However only the [setContract(Contracts c, address contractAddress)](https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexGmx.sol#L313) reset and set the allowance for the PirexContract before updating the [stakedGmx](https://github.com/code-423n4/2022-11-redactedcartel/blob/03b71a8d395c02324cb9fdaf92401357da5b19d1/src/PirexGmx.sol#L72) storage variable with the new contract.
 
