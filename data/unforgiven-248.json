@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "unforgiven",
+  "risk": "2",
+  "title": "Wrong fund distribution in function setTreasuryFeePercent() of PirexFees contract, code should handle current balance with old fee-percentage value then change the fee-percentage,  because those tokens accrued with old fee-percentage and calculation for those tokens should be based on the old value",
+  "issueId": 248,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/248"
+}
