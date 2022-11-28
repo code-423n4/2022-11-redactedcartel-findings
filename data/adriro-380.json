@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "adriro",
+  "risk": "2",
+  "title": "Incorrect rounding while withdrawing assets from `AutoPxGmx` and `AutoPxGlp` contracts",
+  "issueId": 380,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/380"
+}
