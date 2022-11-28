@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "deliriusz",
+  "risk": "2",
+  "title": "Possible funds lost in `AutoPxGlp` due to missing address check",
+  "issueId": 279,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/279"
+}
