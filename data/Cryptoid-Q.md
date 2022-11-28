@@ -1,0 +1,1 @@
+In this contract https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/vaults/PirexERC4626.sol on line 238 there is a transfer instead of a safetranfer for the ERC20 tokens, also on line 256 there is a transferFrom instead of a safeTransferFrom.
