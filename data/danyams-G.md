@@ -138,3 +138,39 @@ PirexERC4626.sol:  https://github.com/code-423n4/2022-11-redactedcartel/blob/mai
 
 AutoPxGmx.sol: https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/vaults/AutoPxGmx.sol
 
+# Cacheing State Variables 
+
+Certain state variables can be cached in AutoPxGlp.sol to avoid an SLOAD.  
+
+A similar optimization can be made in compound( ) of AutoPxGlp.sol if the number of local variables can be reduced to avoid a Stack Too Deep error.  Since compound( ) will be by far the most used function of AutoPxGlp, this may be worthwhile.  
+
+--- a/src/vaults/AutoPxGlp.sol
++++ b/src/vaults/AutoPxGlp.sol
+ 
+@@ -337,16 +337,18 @@ contract AutoPxGlp is PirexERC4626, PxGmxReward, ReentrancyGuard {
+ 
+         if (totalAssets() != 0) beforeDeposit(address(0), 0, 0);
+ 
+-        ERC20 stakedGlp = ERC20(address(PirexGmx(platform).stakedGlp()));
++        address _platform = platform; 
++        
++        ERC20 stakedGlp = ERC20(address(PirexGmx(_platform).stakedGlp()));
+ 
+         // Transfer fsGLP from the caller to the vault
+         // before approving PirexGmx to proceed with the deposit
+         stakedGlp.safeTransferFrom(msg.sender, address(this), amount);
+ 
+         // Approve as needed here since the stakedGlp address is mutable in PirexGmx
+-        stakedGlp.safeApprove(platform, amount);
++        stakedGlp.safeApprove(_platform, amount);
+ 
+-        (, uint256 assets, ) = PirexGmx(platform).depositFsGlp(
++        (, uint256 assets, ) = PirexGmx(_platform).depositFsGlp(
+             amount,
+             address(this)
+         );
+
+Links to Referenced Code:
+
+AutoPxGlp.sol:  https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/vaults/AutoPxGlp.sol
+AutoPxGmx.sol:  https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/vaults/AutoPxGmx.sol
