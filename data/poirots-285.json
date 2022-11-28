@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "poirots",
+  "risk": "2",
+  "title": "User funds cannot be withdrawn from vaults whenever the platform is paused",
+  "issueId": 285,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/285"
+}
