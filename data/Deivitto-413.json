@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "Deivitto",
+  "risk": "2",
+  "title": "`PirexERC4626` and `PirexGmx` doesn't support erc20 tokens with fee on transfer ",
+  "issueId": 413,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/413"
+}
