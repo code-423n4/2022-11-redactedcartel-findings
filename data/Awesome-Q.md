@@ -30,3 +30,14 @@ Line 118:    delete userRewardStates[msg.sender].rewards = 0;
 File: src/PirexRewards.sol
 Line 391:    delete p.userStates[user].rewards = 0;
 ```
+
+## 3. Absent NatSpec comments
+
+Consider providing NatSpec as it is good for readability, debugging, further development etc.
+
+Consider following the official NatSpec comment guidelines to make the contract more readable.
+https://docs.soliditylang.org/en/develop/natspec-format.html
+
+Affected contracts:
+
+[interfaces/IPirexRewards.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/interfaces/IPirexRewards.sol), [interfaces/IProducer.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/interfaces/IProducer.sol), [interfaces/IAutoPxGlp.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/interfaces/IAutoPxGlp.sol), [src/Common.sol](https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/Common.sol)
