@@ -496,3 +496,21 @@ https://github.com/code-423n4/2022-11-redactedcartel/blob/main/src/Common.sol
 
 ## Devoid of System Documentation and Complete Technical Specification
 A system’s design specification and supporting documentation should be almost as important as the system’s implementation itself. Users rely on high-level documentation to understand the big picture of how a system works. Without spending time and effort to create palatable documentation, a user’s only resource is the code itself, something the vast majority of users cannot understand. Security assessments depend on a complete technical specification to understand the specifics of how a system works. When a behavior is not specified (or is specified incorrectly), security assessments must base their knowledge in assumptions, leading to less effective review. Maintaining and updating code relies on supporting documentation to know why the system is implemented in a specific way. If code maintainers cannot reference documentation, they must rely on memory or assistance to make high-quality changes. Currently, the only documentation for the protocol is a single README file, as well as code comments.
+
+## Missing Checks on `userAccrue()`
+In `PirexRewards.sol`, a similar check pertaining to `_globalAccrue()` on line 314 should also be included for `userAccrue()` to be consistent with the protocol's architectural design. 
+
+Consider having the relevant comment and if block added before line 289 so that it will likewise be only calculating and updating states when needed as follows:
+
+```
+        // Calculate the amount of rewards accrued by the user up to this call
+        // Only calculate and update states when needed
+        if (block.timestamp != u.lastUpdate || balance != u.lastBalance) {
+            uint256 rewards = u.rewards +
+                u.lastBalance *
+                (block.timestamp - u.lastUpdate);
+
+        ...
+```
+
+ 
