@@ -1,0 +1,8 @@
+{
+  "contest": 183,
+  "handle": "wagmi",
+  "risk": "3",
+  "title": "Division by zero could cause DOS in function `harvest()` and `claim()` in PirexRewards contract",
+  "issueId": 349,
+  "issueUrl": "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues/349"
+}
