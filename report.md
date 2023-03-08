@@ -1,3 +1,11 @@
+---
+sponsor: "Redacted Cartel"
+slug: "2022-11-redactedcartel"
+date: "2023-01-27"
+title: "Redacted Cartel contest"
+findings: "https://github.com/code-423n4/2022-11-redactedcartel-findings/issues"
+contest: 183
+---
 
 # Overview
 
